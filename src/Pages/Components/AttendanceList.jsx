@@ -72,7 +72,6 @@ const AttendanceList = ({ attandanceList, selectedMonth, selectedSubject }) => {
           {
             STUDENT_ID: STUDENT_ID,
             SUBJECT_ID: selectedSubject,
-            TEACHER_ID: TeacherId,
             PRESENT: presentStatus,
             ATTENDANCE_DATE: AttendanceDate,
           },
@@ -88,13 +87,15 @@ const AttendanceList = ({ attandanceList, selectedMonth, selectedSubject }) => {
       }
     } else {
       try {
+        const token = localStorage.getItem("Token");
         const response = await axios.delete(
-          "/api/attendance?day=" +
-            day +
-            "&date=" +
-            date +
-            "&studentid=" +
-            STUDENT_ID
+          `http://localhost:4000/api/v1/Teacher/RemoveAttendance?STUDENT_ID=${STUDENT_ID}&SUBJECT_ID=${selectedSubject}&ATTENDANCE_DATE=${AttendanceDate}`,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+          }
         );
       } catch (error) {
         console.log(error.message);
