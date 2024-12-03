@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 import Attendance from "./Pages/Attendance";

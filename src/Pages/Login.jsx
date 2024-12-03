@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
@@ -20,33 +19,40 @@ import {
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const {
     register,
     handleSubmit,
-    reset,
     setValue,
     formState: { errors },
   } = useForm();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const submitHandler = async (data) => {
     try {
-      const response=await axios.post( `http://localhost:4000/api/v1/${data.ROLE}/SignIn`,{
-        EMAIL:data.EMAIL,
-        PASSWORD:data.PASSWORD,
-        ROLE:data.ROLE
-      });
+      const response = await axios.post(
+        `http://localhost:4000/api/v1/${data.ROLE}/SignIn`,
+        {
+          EMAIL: data.EMAIL,
+          PASSWORD: data.PASSWORD,
+          ROLE: data.ROLE,
+        }
+      );
       console.log(response.data.user);
-      localStorage.setItem("UserId",response.data.user.USER_ID);
-      localStorage.setItem("UserName",response.data.user.NAME);
-      localStorage.setItem("UserEmail",response.data.user.EMAIL);
-      localStorage.setItem("Token",response.data.token);
-      localStorage.setItem("Role",response.data.role);
-      navigate("/Dashboard")
-      reset();
+      if (response.data.success === true) {
+        localStorage.setItem("UserId", response.data.user.USER_ID);
+        localStorage.setItem("UserName", response.data.user.NAME);
+        localStorage.setItem("UserEmail", response.data.user.EMAIL);
+        localStorage.setItem("Token", response.data.token);
+        localStorage.setItem("Role", response.data.role);
+        toast.success(response.data.message);
+        navigate("/");
+      } else {
+        toast.error(response.data.message);
+      }
     } catch (error) {
-      console.error("Error adding student:", error);
+      toast.error("Error adding student:");
     }
   };
 
@@ -80,9 +86,7 @@ export default function Login() {
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="framework">Role</Label>
-                <Select
-                  onValueChange={(value) => setValue("ROLE", value)}
-                >
+                <Select onValueChange={(value) => setValue("ROLE", value)}>
                   <SelectTrigger id="framework">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>

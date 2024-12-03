@@ -15,17 +15,21 @@ import {
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
 import axios from "axios";
+import { toast } from "react-toastify";
 const TeacherDeleteButton = ({data,fetchTeacherList}) => {
     const HandleDelete=async (id)=>{
         try{
-          const Teacher=await axios.delete(`http://localhost:4000/api/v1/Admin/DeleteTeacher/${id}`,{
+          const response=await axios.delete(`http://localhost:4000/api/v1/Admin/DeleteTeacher/${id}`,{
             headers:{
               "Authorization": "Bearer "+localStorage.getItem("Token")
             }
           })
-          fetchTeacherList(); 
+          if(response.data.success==true){
+            toast.success(response.data.message)
+            fetchTeacherList(); 
+          }else toast.error(response.data.message)
         }catch(err){
-          console.log("error in delete student "+err)
+          toast.error("Error in deleting Teacher")
         }
       }
     return (

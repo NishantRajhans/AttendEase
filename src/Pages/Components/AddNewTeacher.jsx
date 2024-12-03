@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "../../components/ui/button";
 import {
   Dialog,
@@ -11,9 +11,8 @@ import {
 import { Input } from "../../components/ui/input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import Teacher from "../Teacher";
-
-const AddNewStudent = ({ fetchTeacherList,setTeacherlist }) => {
+import { toast } from "react-toastify";
+const AddNewStudent = ({ fetchTeacherList, setTeacherlist }) => {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -23,27 +22,35 @@ const AddNewStudent = ({ fetchTeacherList,setTeacherlist }) => {
   } = useForm();
   const HandleSubmit = async (data, id) => {
     try {
-        const Teacher=await axios.post(`http://localhost:4000/api/v1/Admin/AddTeacher`,{
-          NAME:data.NAME,
-          EMAIL:data.EMAIL,
-          PASSWORD:data.PASSWORD,
-        },{
-          headers:{
+      const response = await axios.post(
+        `http://localhost:4000/api/v1/Admin/AddTeacher`,
+        {
+          NAME: data.NAME,
+          EMAIL: data.EMAIL,
+          PASSWORD: data.PASSWORD,
+        },
+        {
+          headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer "+localStorage.getItem("Token")
-          }
-        })
-        console.log(Teacher);
-        fetchTeacherList()
+            Authorization: "Bearer " + localStorage.getItem("Token"),
+          },
+        }
+      );
+      if (response.data.success === true) {
+        toast.success(response.data.message);
+        fetchTeacherList();
         reset();
         setOpen(false);
-      } catch (error) {
-        console.error("Error adding student:", error);
-      }
-};
+      } else toast.error(response.data.message);
+    } catch (error) {
+      toast.error("Error adding new teacher:");
+    }
+  };
   return (
-    <div className="" >
-      <Button onClick={() => setOpen(true)} className="hover:text-white">+ Add New Teacher</Button>
+    <div className="">
+      <Button onClick={() => setOpen(true)} className="hover:text-white">
+        + Add New Teacher
+      </Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
@@ -84,7 +91,9 @@ const AddNewStudent = ({ fetchTeacherList,setTeacherlist }) => {
                   />
                 </div>
                 <div className="py-3 flex justify-end gap-3">
-                  <Button onClick={() => setOpen(false)} variant="black">Cancel</Button>
+                  <Button onClick={() => setOpen(false)} variant="black">
+                    Cancel
+                  </Button>
                   <Button type="submit">Add</Button>
                 </div>
               </form>

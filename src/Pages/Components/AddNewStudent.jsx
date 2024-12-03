@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Button } from "../../components/ui/button";
 import {
   Dialog,
@@ -11,8 +11,9 @@ import {
 import { Input } from "../../components/ui/input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const AddNewStudent = ({ fetchStudentList,grades }) => {
+const AddNewStudent = ({ fetchStudentList, grades }) => {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -23,29 +24,40 @@ const AddNewStudent = ({ fetchStudentList,grades }) => {
 
   const submitHandler = async (data) => {
     try {
-      const Student=await axios.post("http://localhost:4000/api/v1/Admin/AddStudent",{
-        NAME:data.NAME,
-        EMAIL:data.EMAIL,
-        PASSWORD:data.PASSWORD,
-        PHONENUMBER:data.PHONENUMBER,
-        ADDRESS:data.ADDRESS,
-        GRADE:data.GRADE
-      },{
-        headers:{
-          "Content-Type": "application/json",
-          "Authorization": "Bearer "+localStorage.getItem("Token")
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/Admin/AddStudent",
+        {
+          NAME: data.NAME,
+          EMAIL: data.EMAIL,
+          PASSWORD: data.PASSWORD,
+          PHONENUMBER: data.PHONENUMBER,
+          ADDRESS: data.ADDRESS,
+          GRADE: data.GRADE,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("Token"),
+          },
         }
-      })
-      fetchStudentList(); 
-      reset();
-      setOpen(false);
+      );
+      if (response.data.success === true) {
+        toast.success(response.data.message);
+        fetchStudentList();
+        reset();
+        setOpen(false);
+      } else {
+        toast.error(response.data.message);
+      }
     } catch (error) {
-      console.error("Error adding student:", error);
+      toast.error("Error adding new student:");
     }
   };
   return (
-    <div className="" >
-      <Button onClick={() => setOpen(true)} className="hover:text-white">+ Add New Student</Button>
+    <div className="">
+      <Button onClick={() => setOpen(true)} className="hover:text-white">
+        + Add New Student
+      </Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
@@ -115,14 +127,20 @@ const AddNewStudent = ({ fetchStudentList,grades }) => {
                     {...register("GRADE", { required: true })}
                   >
                     {grades?.map((grade, index) => (
-                      <option key={index} value={grade.GRADE_NAME} className="text-black">
+                      <option
+                        key={index}
+                        value={grade.GRADE_NAME}
+                        className="text-black"
+                      >
                         {grade.GRADE_NAME}
                       </option>
                     ))}
                   </select>
                 </div>
                 <div className="py-3 flex justify-end gap-3">
-                  <Button onClick={() => setOpen(false)} variant="black">Cancel</Button>
+                  <Button onClick={() => setOpen(false)} variant="black">
+                    Cancel
+                  </Button>
                   <Button type="submit">Add</Button>
                 </div>
               </form>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Button } from "../../components/ui/button";
 import {
   Dialog,
@@ -11,8 +11,9 @@ import {
 import { Input } from "../../components/ui/input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const AddNewStudent = ({fetchSubjectList,Teacherslist,grades}) => {
+const AddNewStudent = ({ fetchSubjectList, Teacherslist, grades }) => {
   const [open, setOpen] = useState(false);
   const {
     register,
@@ -23,22 +24,28 @@ const AddNewStudent = ({fetchSubjectList,Teacherslist,grades}) => {
 
   const submitHandler = async (data) => {
     try {
-      const response= await axios.post("http://localhost:4000/api/v1/Admin/AddSubject",{
-        GRADE_ID:data.GRADE_ID,
-        SUBJECT_NAME:data.SUBJECT_NAME,
-        TEACHER_ID:data.TEACHER_ID
-      },{
-        headers:{
-          'Content-Type': 'application/json',
-          "Authorization": "Bearer "+localStorage.getItem("Token")
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/Admin/AddSubject",
+        {
+          GRADE_ID: data.GRADE_ID,
+          SUBJECT_NAME: data.SUBJECT_NAME,
+          TEACHER_ID: data.TEACHER_ID,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("Token"),
+          },
         }
-      })
-      fetchSubjectList();
-      console.log("Success")
-      reset();
-      setOpen(false);
+      );
+      if (response.data.success == true) {
+        toast.success(response.data.message)
+        fetchSubjectList();
+        reset();
+        setOpen(false);
+      } else toast.error(response.data.message);
     } catch (error) {
-      console.error("Error adding student:", error);
+      toast.error("Error adding new subject:");
     }
   };
   return (
@@ -70,7 +77,11 @@ const AddNewStudent = ({fetchSubjectList,Teacherslist,grades}) => {
                     {...register("TEACHER_ID", { required: true })}
                   >
                     {Teacherslist?.map((teacher, index) => (
-                      <option key={index} value={teacher.TEACHER_ID} className="text-black">
+                      <option
+                        key={index}
+                        value={teacher.TEACHER_ID}
+                        className="text-black"
+                      >
                         {teacher.NAME}
                       </option>
                     ))}
@@ -83,7 +94,11 @@ const AddNewStudent = ({fetchSubjectList,Teacherslist,grades}) => {
                     {...register("GRADE_ID", { required: true })}
                   >
                     {grades?.map((grade, index) => (
-                      <option key={index} value={grade.GRADE_ID} className="text-black">
+                      <option
+                        key={index}
+                        value={grade.GRADE_ID}
+                        className="text-black"
+                      >
                         {grade.GRADE_NAME}
                       </option>
                     ))}

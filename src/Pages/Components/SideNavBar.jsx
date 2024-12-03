@@ -26,6 +26,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
+import { toast } from "react-toastify";
 const SideNav = () => {
   const menuList = [
     {
@@ -72,19 +73,24 @@ const SideNav = () => {
     localStorage.getItem("Role") ? localStorage.getItem("Role") : null
   );
   const HandleLogout=()=>{
-    localStorage.removeItem("UserId");
+    try{
+      localStorage.removeItem("UserId");
       localStorage.removeItem("UserName");
       localStorage.removeItem("UserEmail");
       localStorage.removeItem("Token");
       localStorage.removeItem("Role");
+      toast.success("User LogOut Sucessfully")
       navigate("/LogIn")
+    }catch(error){
+      toast.error("Error in LogOut")
+    };
   }
   const path = location.pathname;
   useEffect(() => {}, [path]);
   return (
     <div className="border shadow-md h-screen p-5 w-[20%] fixed top-0 left-0 rounded-se-2xl shadow-yellow-300">
       <div className="flex justify-center items-center gap-x-4">
-        <img src="/utils/images (8).jpeg" alt="logo" width={"56px"}></img>
+        <img src="/utils/images (8).jpeg" alt="logo" width={"56px"} className=" rounded-md"></img>
       <h1 className="text-3xl font-extrabold">AttendEase</h1>
       </div>
       <hr className="my-5 bg-yellow-400 h-[1.5px]" />
