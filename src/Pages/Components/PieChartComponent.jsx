@@ -22,7 +22,7 @@ const PieChartComponent = ({totalPresentData,attandanceList}) => {
     const AttendanceListCount=()=>{
         const totalStudents=getUniqueRecord()?.length;
         const today=moment().format('D')
-        const presentPercent = (attandanceList?.length / (totalStudents * Number(today))) * 100;
+        const presentPercent = (totalPresentData?.length / (totalStudents * Number(today))) * 100;
         setData( [
             {
               "name": "Total Present",

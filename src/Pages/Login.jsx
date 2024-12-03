@@ -34,13 +34,15 @@ export default function Login() {
     try {
       const response=await axios.post( `http://localhost:4000/api/v1/${data.ROLE}/SignIn`,{
         EMAIL:data.EMAIL,
-        PASSWORD:data.PASSWORD
+        PASSWORD:data.PASSWORD,
+        ROLE:data.ROLE
       });
       console.log(response.data.user);
       localStorage.setItem("UserId",response.data.user.USER_ID);
       localStorage.setItem("UserName",response.data.user.NAME);
       localStorage.setItem("UserEmail",response.data.user.EMAIL);
       localStorage.setItem("Token",response.data.token);
+      localStorage.setItem("Role",response.data.role);
       navigate("/Dashboard")
       reset();
     } catch (error) {

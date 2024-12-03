@@ -57,7 +57,7 @@ const Dashboard = () => {
         <SubjectSelection selectedSubject={(value)=>setSelectedSubject(value)} setSelectedSubject={setSelectedSubject}></SubjectSelection>
         </div>
         </div>
-        <StatusList setSelectedSubject={setSelectedSubject} setSelectedMonth={setSelectedMonth} attandanceList={attandanceList} totalPresentData={totalPresentData}></StatusList>
+        <StatusList selectedMonth={selectedMonth} selectedSubject={selectedMonth} attandanceList={attandanceList} totalPresentData={totalPresentData}></StatusList>
         <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="md:col-span-2">
             <BarChartComponent totalPresentData={totalPresentData} attandanceList={attandanceList}></BarChartComponent>

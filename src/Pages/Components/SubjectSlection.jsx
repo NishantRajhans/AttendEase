@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const SubjectSelection = ({selectedSubject,setSelectedSubject}) => {
+const SubjectSelection = ({setSelectedSubject}) => {
   const [Subject, setSubject] = useState([]);
   const getSubject = async () => {
     try {
       const token=localStorage.getItem('Token');
-      const response = await axios.get("http://localhost:4000/api/v1/Teacher/FetchSubject",{headers:{
+      const response = await axios.get("http://localhost:4000/api/v1/Teacher/FetchSubject",{
+        headers:{
         'Authorization':"Bearer "+token,
         'Content-Type':'application/json'
       }});
@@ -24,7 +25,7 @@ const SubjectSelection = ({selectedSubject,setSelectedSubject}) => {
       <div className="flex flex-col">
         <select
           className="w-full h-10 border rounded-md"
-          onChange={(event)=>selectedSubject(event.target.value)}
+          onChange={(event)=>setSelectedSubject(event.target.value)}
         >
           {Subject?.map((subject, index) => (
             <option key={index} value={subject.SUBJECT_ID}>

@@ -6,20 +6,46 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import axios from "axios";
 const Subject = () => {
   const [Subjectslist, setSubjectslist] = useState();
+  const [grades, setGrades] = useState([]);
   const fetchSubjectList = async () => {
-    const Subject=await axios.get("http://localhost:4000/api/v1/Admin/GetAllSubject")
+    const Subject=await axios.get("http://localhost:4000/api/v1/Admin/GetAllSubject",{
+      headers:{
+        "Content-Type": "application/json",
+        "Authorization": "Bearer "+localStorage.getItem("Token")
+      }
+    });
     setSubjectslist(Subject.data.response);
   };
   const [Teacherslist, setTeacherslist] = useState();
   const fetchTeacherList = async () => {
     const Teacher = await axios.get(
-      "http://localhost:4000/api/v1/Admin/GetAllTeacher"
+      "http://localhost:4000/api/v1/Admin/GetAllTeacher",{
+        headers:{
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+localStorage.getItem("Token")
+        }
+      }
     );
     setTeacherslist(Teacher.data.response);
+  };
+  const getGrades = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/api/v1/Admin/GetAllGrade",{
+        headers:{
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+localStorage.getItem("Token")
+        }
+      });
+      const gradeData = response.data;
+      setGrades(gradeData.response || []);
+    } catch (error) {
+      console.error("Error fetching grades:", error);
+    }
   };
   useEffect(() => {
     fetchSubjectList();
     fetchTeacherList();
+    getGrades();
   }, []);
   return (
     <div>
@@ -34,7 +60,7 @@ const Subject = () => {
             Subjectslist={Subjectslist}
             Teacherslist={Teacherslist}
             fetchSubjectList={fetchSubjectList}
-            setSubjectlist={setSubjectslist}
+            grades={grades}
           />
           </div>
         </div>

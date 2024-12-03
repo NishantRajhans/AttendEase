@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Card from './Card';
 import { GraduationCap, TrendingDown, TrendingUp } from 'lucide-react';
 
-const StatusList = ({setSelectedGrade,setSelectedMonth ,attandanceList}) => {
+const StatusList = ({selectedMonth,selectedSubject ,attandanceList,totalPresentData}) => {
     const [totalStudent, setTotalStudent] = useState(0);
     const [presentPercents, setPresentPercents] = useState(0);
 
@@ -24,9 +24,9 @@ const StatusList = ({setSelectedGrade,setSelectedMonth ,attandanceList}) => {
         const totalStudents = getUniqueRecord();
         setTotalStudent(totalStudents);
         const today = moment().format('D');
-        const presentPercent = (attandanceList?.length / (totalStudents * Number(today))) * 100;
+        const presentPercent = (totalPresentData?.length / (totalStudents * Number(today))) * 100;
         setPresentPercents(presentPercent || 0);
-    }, [setSelectedMonth,setSelectedGrade,attandanceList]);
+    }, [selectedMonth,selectedSubject,attandanceList]);
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-6">

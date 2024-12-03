@@ -96,7 +96,6 @@ const AttendanceList = ({ attandanceList, selectedMonth, selectedSubject }) => {
             "&studentid=" +
             STUDENT_ID
         );
-        toast(response.data.message);
       } catch (error) {
         console.log(error.message);
       }

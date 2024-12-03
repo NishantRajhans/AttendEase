@@ -8,8 +8,8 @@ import {
   LayoutIcon,
   Settings,
 } from "lucide-react";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect,useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Avatar,
   AvatarFallback,
@@ -26,8 +26,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
-import { Button } from "../../components/ui/button";
-
 const SideNav = () => {
   const menuList = [
     {
@@ -35,43 +33,63 @@ const SideNav = () => {
       name: "Dashboard",
       icon: LayoutIcon,
       path: "/dashboard",
+      role:"Teacher"
     },
     {
       id: 2,
       name: "Students",
       icon: GraduationCap,
       path: "/dashboard/students",
+      role:"Admin"
     },
     {
       id: 3,
       name: "Teachers",
       icon: BookOpenText,
       path: "/dashboard/teachers",
+      role:"Admin"
     },
     {
       id: 4,
       name: "Attendance",
       icon: Hand,
       path: "/dashboard/attendance",
+      role:"Teacher"
     },
     {
       id: 5,
       name: "Subjects",
       icon: Album,
       path: "/dashboard/subjects",
+      role:"Admin"
     },
   ];
+  const navigate=useNavigate()
   const UserEmail = localStorage.getItem("UserEmail");
   const UserName = localStorage.getItem("UserName");
   const location = useLocation();
+  const [role, setRole] = useState(
+    localStorage.getItem("Role") ? localStorage.getItem("Role") : null
+  );
+  const HandleLogout=()=>{
+    localStorage.removeItem("UserId");
+      localStorage.removeItem("UserName");
+      localStorage.removeItem("UserEmail");
+      localStorage.removeItem("Token");
+      localStorage.removeItem("Role");
+      navigate("/LogIn")
+  }
   const path = location.pathname;
   useEffect(() => {}, [path]);
   return (
     <div className="border shadow-md h-screen p-5 w-[20%] fixed top-0 left-0 rounded-se-2xl shadow-yellow-300">
+      <div className="flex justify-center items-center gap-x-4">
+        <img src="/utils/images (8).jpeg" alt="logo" width={"56px"}></img>
       <h1 className="text-3xl font-extrabold">AttendEase</h1>
+      </div>
       <hr className="my-5 bg-yellow-400 h-[1.5px]" />
       {menuList.map((menu, index) => (
-        <a href={menu.path} key={index}>
+        role==menu.role?(<Link to={menu.path} key={index}>
           <h2
             className={`
               flex items-center gap-3 text-md p-4 text-slate-600 hover:bg-primary hover:text-white cursor-pointer rounded-lg my-2 ${
@@ -83,7 +101,7 @@ const SideNav = () => {
             <menu.icon />
             {menu.name}
           </h2>
-        </a>
+        </Link>):(null)
       ))}
       <AlertDialog>
         <AlertDialogTrigger asChild>
@@ -109,7 +127,7 @@ const SideNav = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>LogOut</AlertDialogAction>
+            <AlertDialogAction onClick={HandleLogout}>LogOut</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

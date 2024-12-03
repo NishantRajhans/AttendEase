@@ -7,7 +7,12 @@ import axios from "axios";
 const Teacher = () => {
   const [Teacherslist, setTeacherslist] = useState();
   const fetchTeacherList = async () => {
-    const Teacher=await axios.get("http://localhost:4000/api/v1/Admin/GetAllTeacher")
+    const Teacher=await axios.get("http://localhost:4000/api/v1/Admin/GetAllTeacher",{
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer "+localStorage.getItem("Token")
+      }
+    })
     setTeacherslist(Teacher.data.response);
   };
   useEffect(() => {
@@ -25,7 +30,6 @@ const Teacher = () => {
             <TeacherList
             Teacherslist={Teacherslist}
             fetchTeacherList={fetchTeacherList}
-            setTeacherlist={setTeacherslist}
           />
           </div>
         </div>

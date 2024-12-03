@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideNav from "./Components/SideNavBar";
 import AttendanceList from "./Components/AttendanceList";
 import MonthSelection from "./Components/MonthSelection";
@@ -13,18 +13,22 @@ const Attendance = () => {
     const [selectedSubject,setSelectedSubject]=useState();
     const[attandanceList,setAttandanceList]=useState();
     const onSearchHandelre= async()=>{
-        const date=moment(selectedMonth).format('MM/YYYY')
-        const Month=date.split('/')[0];
-        const Year=date.split('/')[1];
-        const Token=localStorage.getItem('Token');
-        const Subject=selectedSubject
-        const list=await axios.get("http://localhost:4000/api/v1/Teacher/FetchAttendance?Subject="+Subject+"&Month="+Month+"&Year="+Year,{headers:{
-          'Authorization':"Bearer "+Token,
-          'Content-Type':'application/json'
-        }})
-        const data=list?.data
-        setAttandanceList(data?.response)
-    }
+      const date=moment(selectedMonth).format('MM/YYYY')
+      const Month=date.split('/')[0];
+      const Year=date.split('/')[1];
+      const Token=localStorage.getItem('Token');
+      const Subject=selectedSubject
+      console.log(Subject,Month,Year)
+      const list=await axios.get("http://localhost:4000/api/v1/Teacher/FetchAttendance?Subject="+Subject+"&Month="+Month+"&Year="+Year,{headers:{
+        'Authorization':"Bearer "+Token,
+        'Content-Type':'application/json'
+      }})
+      const data=list?.data
+      setAttandanceList(data?.response)
+  }
+    useEffect(()=>{
+      onSearchHandelre()
+    },[selectedSubject])
   return (
     <div className="flex">
       <SideNav></SideNav>

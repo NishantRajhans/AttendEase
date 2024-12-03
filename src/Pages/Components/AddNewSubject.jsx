@@ -12,9 +12,8 @@ import { Input } from "../../components/ui/input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-const AddNewStudent = ({ fetchStudentList ,Teacherslist}) => {
+const AddNewStudent = ({fetchSubjectList,Teacherslist,grades}) => {
   const [open, setOpen] = useState(false);
-  const [grades, setGrades] = useState([]);
   const {
     register,
     handleSubmit,
@@ -24,27 +23,24 @@ const AddNewStudent = ({ fetchStudentList ,Teacherslist}) => {
 
   const submitHandler = async (data) => {
     try {
-      // await axios.post("/api/student", data);
-      fetchStudentList();
+      const response= await axios.post("http://localhost:4000/api/v1/Admin/AddSubject",{
+        GRADE_ID:data.GRADE_ID,
+        SUBJECT_NAME:data.SUBJECT_NAME,
+        TEACHER_ID:data.TEACHER_ID
+      },{
+        headers:{
+          'Content-Type': 'application/json',
+          "Authorization": "Bearer "+localStorage.getItem("Token")
+        }
+      })
+      fetchSubjectList();
+      console.log("Success")
       reset();
       setOpen(false);
     } catch (error) {
       console.error("Error adding student:", error);
     }
   };
-  const getGrades = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/api/v1/Admin/GetAllGrade");
-      const gradeData = response.data;
-      setGrades(gradeData.response || []);
-    } catch (error) {
-      console.error("Error fetching grades:", error);
-    }
-  };
-  useEffect(() => {
-    getGrades();
-  }, []);
-
   return (
     <div className="">
       <Button onClick={() => setOpen(true)} className="hover:text-white">
@@ -97,7 +93,7 @@ const AddNewStudent = ({ fetchStudentList ,Teacherslist}) => {
                   <Button onClick={() => setOpen(false)} variant="black">
                     Cancel
                   </Button>
-                  <Button type="submit">Save</Button>
+                  <Button type="submit">Add</Button>
                 </div>
               </form>
             </DialogDescription>

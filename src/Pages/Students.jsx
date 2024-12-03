@@ -6,11 +6,32 @@ import axios from "axios";
 import StudentList from "./Components/StudentList";
 const Students = () => {
   const [Studentlist, setStudentlist] = useState();
+  const [grades, setGrades] = useState([]);
   const fetchStudentList = async () => {
-    const Student=await axios.get("http://localhost:4000/api/v1/Admin/GetAllStudent")
+    const Student=await axios.get("http://localhost:4000/api/v1/Admin/GetAllStudent",{
+      headers:{
+        "Content-Type": "application/json",
+        "Authorization": "Bearer "+localStorage.getItem("Token")
+      }
+    })
     setStudentlist(Student.data.response);
   };
+    const getGrades = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/v1/Admin/GetAllGrade",{
+          headers:{
+            "Content-Type": "application/json",
+            "Authorization": "Bearer "+localStorage.getItem("Token")
+          }
+        });
+        const gradeData = response.data.response; 
+        setGrades(gradeData);
+      } catch (error) {
+        console.error("Error fetching grades:", error);
+      }
+    };
   useEffect(() => {
+    getGrades();
     fetchStudentList();
   }, []);
   return (
@@ -25,7 +46,7 @@ const Students = () => {
           <StudentList
             Studentlist={Studentlist}
             fetchStudentList={fetchStudentList}
-            setStudentlist={setStudentlist}
+            grades={grades}
           />
         </div>
       </div>

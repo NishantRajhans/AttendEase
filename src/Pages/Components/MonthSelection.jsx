@@ -30,7 +30,7 @@ const MonthSelection = ({selectedMonth}) => {
           <Calendar
             mode="single"
             month={month}
-            onMonthChange={(value)=>{setMonth(value),selectedMonth(value)}}
+            onMonthChange={(value)=>{setMonth(value);selectedMonth(value)}}
             className="flex flex-1 justify-center"
           />
         </PopoverContent>

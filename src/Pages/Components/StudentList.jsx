@@ -5,65 +5,48 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import AddNewStudent from "./AddNewStudent";
-import { Search, Trash } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { Search} from "lucide-react";
+import EditButton from "./StudentEditButton";
+import DeleteButton from "./StudentDeleteButton";
 const pagination = true;
 const paginationPageSize = 20;
 const paginationPageSizeSelector = [20, 100, 500];
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../../components/ui/alert-dialog";
-import axios from "axios";
-
-const StudentList = ({ Studentlist, fetchStudentList, setStudentlist }) => {
-  const HandleDelete = async (id) => {
-    //await axios.delete(`/api/student?${id}`)
-    fetchStudentList();
-  };
-  const customButton = (props) => {
-    return (
-      <AlertDialog>
-        <AlertDialogTrigger>
-          <Button size="sm">
-            <Trash></Trash>
-          </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={() => HandleDelete(props.data.ID)}>
-              Continue
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    );
-  };
-  const [colDefs, setColDefs] = useState([
-    { field: "STUDENT_ID", filter: true },
-    { field: "NAME", filter: true },
-    { field: "ADDRESS", filter: true },
-    { field: "GRADE", filter: true },
-    { field: "PHONENUMBER", filter: true },
-    { field: "ACTION", cellRenderer: customButton },
-  ]);
+const StudentList = ({ Studentlist,fetchStudentList,grades}) => {
+  const [colDefs, setColDefs] = useState();  
   const [rowData, setRowData] = useState([]);
   const [searchInput, setSearchInput] = useState();
+  useEffect(() => {
+    if (grades && grades.length > 0) {
+      setColDefs([
+        { field: "STUDENT_ID", filter: true },
+        { field: "NAME", filter: true },
+        { field: "ADDRESS", filter: true },
+        { field: "GRADE", filter: true },
+        { field: "PHONENUMBER", filter: true },
+        {
+          field: "EDIT",
+          cellRenderer: (params) => (
+            <EditButton
+              grades={grades}
+              data={params.data}
+              fetchStudentList={fetchStudentList}
+            />
+          ),
+          width: "200%",
+        },
+        {
+          field: "DELETE",
+          cellRenderer: (params) => (
+            <DeleteButton
+              fetchStudentList={fetchStudentList}
+              data={params.data}
+            />
+          ),
+          width: "200%",
+        },
+      ]);
+    }
+  }, [grades,fetchStudentList]);
   useEffect(() => {
     setRowData(Studentlist);
   }, [Studentlist]);
@@ -84,7 +67,7 @@ const StudentList = ({ Studentlist, fetchStudentList, setStudentlist }) => {
           </div>
             <AddNewStudent
               fetchStudentList={fetchStudentList}
-              setStudentlist={setStudentlist}
+              grades={grades}
             />
           </div>
         </div>

@@ -12,10 +12,8 @@ import { Input } from "../../components/ui/input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-const AddNewStudent = ({ fetchStudentList }) => {
+const AddNewStudent = ({ fetchStudentList,grades }) => {
   const [open, setOpen] = useState(false);
-  const [grades, setGrades] = useState([]);
-
   const {
     register,
     handleSubmit,
@@ -25,7 +23,19 @@ const AddNewStudent = ({ fetchStudentList }) => {
 
   const submitHandler = async (data) => {
     try {
-      //await axios.post("/api/student", data);
+      const Student=await axios.post("http://localhost:4000/api/v1/Admin/AddStudent",{
+        NAME:data.NAME,
+        EMAIL:data.EMAIL,
+        PASSWORD:data.PASSWORD,
+        PHONENUMBER:data.PHONENUMBER,
+        ADDRESS:data.ADDRESS,
+        GRADE:data.GRADE
+      },{
+        headers:{
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+localStorage.getItem("Token")
+        }
+      })
       fetchStudentList(); 
       reset();
       setOpen(false);
@@ -33,21 +43,6 @@ const AddNewStudent = ({ fetchStudentList }) => {
       console.error("Error adding student:", error);
     }
   };
-
-  useEffect(() => {
-    const getGrades = async () => {
-      try {
-        const response = await axios.get("http://localhost:4000/api/v1/Admin/GetAllGrade");
-        const gradeData = response.data; 
-        console.log(gradeData.response)
-        setGrades(gradeData.response || []);
-      } catch (error) {
-        console.error("Error fetching grades:", error);
-      }
-    };
-    getGrades();
-  }, []);
-
   return (
     <div className="" >
       <Button onClick={() => setOpen(true)} className="hover:text-white">+ Add New Student</Button>
@@ -58,11 +53,11 @@ const AddNewStudent = ({ fetchStudentList }) => {
             <DialogDescription>
               <form onSubmit={handleSubmit(submitHandler)}>
                 <div className="flex-col py-3">
-                  <label htmlFor="name" className="text-right">
+                  <label htmlFor="fullname" className="text-right">
                     Full Name
                   </label>
                   <Input
-                    id="name"
+                    id="fullname"
                     placeholder="Enter Full Name"
                     className="col-span-3"
                     {...register("NAME", { required: true })}
@@ -81,24 +76,22 @@ const AddNewStudent = ({ fetchStudentList }) => {
                   />
                 </div>
                 <div className="flex-col py-3">
-                  <label htmlFor="contact" className="text-right">
+                  <label htmlFor="email" className="text-right">
                     Email
                   </label>
                   <Input
-                    type="number"
-                    id="contact"
+                    id="email"
                     placeholder="Enter Email"
                     className="col-span-3"
                     {...register("EMAIL", { required: true })}
                   />
                 </div>
                 <div className="flex-col py-3">
-                  <label htmlFor="contact" className="text-right">
+                  <label htmlFor="password" className="text-right">
                     Password
                   </label>
                   <Input
-                    type="number"
-                    id="contact"
+                    id="passowrd"
                     placeholder="Enter Password"
                     className="col-span-3"
                     {...register("PASSWORD", { required: true })}
@@ -130,7 +123,7 @@ const AddNewStudent = ({ fetchStudentList }) => {
                 </div>
                 <div className="py-3 flex justify-end gap-3">
                   <Button onClick={() => setOpen(false)} variant="black">Cancel</Button>
-                  <Button type="submit">Save</Button>
+                  <Button type="submit">Add</Button>
                 </div>
               </form>
             </DialogDescription>
