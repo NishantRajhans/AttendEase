@@ -4,6 +4,6 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 const Protected = () => {
     const [isLoggedIn,setIsLogIn] =useState(localStorage.getItem("Token")?true:false);
-    return isLoggedIn?<Outlet></Outlet>:<Navigate to={"/LogIn"}></Navigate>
+    return isLoggedIn==true?<Outlet/>:<Navigate to="/LogIn"/>;
 }
 export default Protected

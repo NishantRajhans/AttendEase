@@ -33,37 +33,44 @@ const SideNav = () => {
       id: 1,
       name: "Dashboard",
       icon: LayoutIcon,
-      path: "/dashboard",
+      path: "/Dashboard",
       role:"Teacher"
     },
     {
       id: 2,
       name: "Students",
       icon: GraduationCap,
-      path: "/dashboard/students",
+      path: "/Dashboard/Students",
       role:"Admin"
     },
     {
       id: 3,
       name: "Teachers",
       icon: BookOpenText,
-      path: "/dashboard/teachers",
+      path: "/Dashboard/Teachers",
       role:"Admin"
     },
     {
       id: 4,
       name: "Attendance",
       icon: Hand,
-      path: "/dashboard/attendance",
+      path: "/Dashboard/Attendance",
       role:"Teacher"
     },
     {
       id: 5,
       name: "Subjects",
       icon: Album,
-      path: "/dashboard/subjects",
+      path: "/Dashboard/Subjects",
       role:"Admin"
     },
+    {
+      id:6,
+      name:"Student-Dashboard",
+      icon:LayoutIcon,
+      path:"/StudentDashboard",
+      role:"Student"
+    }
   ];
   const navigate=useNavigate()
   const UserEmail = localStorage.getItem("UserEmail");
@@ -86,7 +93,6 @@ const SideNav = () => {
     };
   }
   const path = location.pathname;
-  useEffect(() => {}, [path]);
   return (
     <div className="border shadow-md h-screen p-5 w-[20%] fixed top-0 left-0 rounded-se-2xl shadow-yellow-300">
       <div className="flex justify-center items-center gap-x-4">

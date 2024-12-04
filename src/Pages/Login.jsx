@@ -39,7 +39,6 @@ export default function Login() {
           ROLE: data.ROLE,
         }
       );
-      console.log(response.data.user);
       if (response.data.success === true) {
         localStorage.setItem("UserId", response.data.user.USER_ID);
         localStorage.setItem("UserName", response.data.user.NAME);
@@ -47,12 +46,14 @@ export default function Login() {
         localStorage.setItem("Token", response.data.token);
         localStorage.setItem("Role", response.data.role);
         toast.success(response.data.message);
-        navigate("/");
+        if(response.data.role=="Admin")navigate("/Dashboard/Students");
+        else if(response.data.role=="Teacher")navigate("/Dashboard");
+        else navigate("/StudentDashboard")
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
-      toast.error("Error adding student:");
+      toast.error("Error in LogIn");
     }
   };
 
