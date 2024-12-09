@@ -49,7 +49,7 @@ This project is a frontend system for a **AttendEase** application. It provides 
 1. Clone the repository:
    ```bash
    git clone https://github.com/NishantRajhans/AttendEase.git
-   cd college-attendance-frontend
+   cd attendance
    ```
 2. Install dependencies:
    ```bash
