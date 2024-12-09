@@ -37,7 +37,7 @@ This project is a frontend system for a **AttendEase** application. It provides 
 ---
 
 ## Technologies Used
-- **Frontend**: React.js, HTML5, CSS3, JavaScript
+- **Frontend**: React.js,JavaScript
 - **HTTP Client**: Axios 
 - **Styling**: Tailwind CSS, Shadcn
 - **Routing**: React Router
