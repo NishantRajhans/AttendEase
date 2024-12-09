@@ -64,14 +64,17 @@ This project is a frontend system for a **AttendEase** application. It provides 
    http://localhost:3000
    ```
 ### Images
- - **Admin**
- ![Students](./assets/Screenshot 2024-12-08 092215.png)
- ![Teachers](./assets/Screenshot 2024-12-08 092229.png)
- ![Subjects](./assets/Screenshot 2024-12-08 092243.png)
- - **Teacher**
- ![Dashboard](./assets/Screenshot 2024-12-09 203122.png)
- ![Attendance](./assets/Screenshot 2024-12-08 092115.png)
- - **Student**
- ![Dashboard](./assets/Screenshot 2024-12-09 200733.png)
- - **LogIn**
- ![Login](./assets/Screenshot 2024-12-08 092149.png)
+- **Admin**
+  ![Students](./assets/Screenshot%202024-12-08%20092215.png)
+  ![Teachers](./assets/Screenshot%202024-12-08%20092229.png)
+  ![Subjects](./assets/Screenshot%202024-12-08%20092243.png)
+
+- **Teacher**
+  ![Dashboard](./assets/Screenshot%202024-12-09%20203122.png)
+  ![Attendance](./assets/Screenshot%202024-12-08%20092115.png)
+
+- **Student**
+  ![Dashboard](./assets/Screenshot%202024-12-09%20200733.png)
+
+- **LogIn**
+  ![Login](./assets/Screenshot%202024-12-08%20092149.png)
