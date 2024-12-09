@@ -41,6 +41,7 @@ const AddNewStudent = ({ fetchStudentList, grades }) => {
           },
         }
       );
+      console.log(response)
       if (response.data.success === true) {
         toast.success(response.data.message);
         fetchStudentList();

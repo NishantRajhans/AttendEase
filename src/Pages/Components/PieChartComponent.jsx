@@ -3,7 +3,7 @@ import React from "react";
 import { useState,useEffect } from "react";
 import { ResponsiveContainer ,PieChart,Pie} from "recharts";
 
-const PieChartComponent = ({totalPresentData,attandanceList}) => {
+const PieChartComponent = ({attandanceList,totalPresent}) => {
     const [data,setData]=useState()
     const getUniqueRecord = () => {
         const uniqueRecord = [];
@@ -18,11 +18,11 @@ const PieChartComponent = ({totalPresentData,attandanceList}) => {
       };
       useEffect(()=>{
         AttendanceListCount();
-      },[attandanceList||totalPresentData])
+      },[attandanceList||totalPresent])
     const AttendanceListCount=()=>{
         const totalStudents=getUniqueRecord()?.length;
         const today=moment().format('D')
-        const presentPercent = (totalPresentData?.length / (totalStudents * Number(today))) * 100;
+        const presentPercent = (totalPresent/ (totalStudents * Number(today))) * 100;
         setData( [
             {
               "name": "Total Present",

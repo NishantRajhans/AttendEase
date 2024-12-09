@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# AttendEase Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a frontend system for a **AttendEase** application. It provides a role-based login system for **Admins**, **Teachers**, and **Students**. Each user type has access to specific functionalities tailored to their role.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Role-Based Login
+- **Admin**: Access to manage teachers, students, and subjects.
+- **Teacher**: Dashboard to view attendance statistics and manage student attendance.
+- **Student**: Dashboard to view personal attendance details.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Role-Specific Functionalities
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### **Admin**
+- **Pages**:
+  - **Students**: Add, edit, and delete student records.
+  - **Teachers**: Add, edit, and delete teacher records.
+  - **Subjects**: Add, edit, and delete subjects.
+  
+#### **Teacher**
+- **Pages**:
+  - **Dashboard**:  
+    - View a list of subjects assigned to the teacher.
+    - Check the total number of students present and absent for a particular subject in a specific month.
+  - **Attendance**:  
+    - Search for students in a particular subject.
+    - Add attendance records for a specific subject and date.
 
-### `npm test`
+#### **Student**
+- **Page**:
+  - **Dashboard**:  
+    - View attendance details for each subject.
+    - See the percentage of **present** and **absent** classes for each subject.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Technologies Used
+- **Frontend**: React.js, HTML5, CSS3, JavaScript
+- **HTTP Client**: Axios 
+- **Styling**: Tailwind CSS, Shadcn
+- **Routing**: React Router
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
+- Node.js and npm installed on your system.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/NishantRajhans/AttendEase.git
+   cd college-attendance-frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+4. Open your browser and navigate to:
+   ```bash
+   http://localhost:3000
+   ```
+### Images
+ - **Admin**
+ ![Students](./assets/Screenshot 2024-12-08 092215.png)
+ ![Teachers](./assets/Screenshot 2024-12-08 092229.png)
+ ![Subjects](./assets/Screenshot 2024-12-08 092243.png)
+ - **Teacher**
+ ![Dashboard](./assets/Screenshot 2024-12-09 203122.png)
+ ![Attendance](./assets/Screenshot 2024-12-08 092115.png)
+ - **Student**
+ ![Dashboard](./assets/Screenshot 2024-12-09 200733.png)
+ - **LogIn**
+ ![Login](./assets/Screenshot 2024-12-08 092149.png)

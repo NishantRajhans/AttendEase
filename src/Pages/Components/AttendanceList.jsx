@@ -4,11 +4,10 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import moment from "moment";
-import axios from "axios";
 const pagination = true;
 const paginationPageSize = 20;
 const paginationPageSizeSelector = [20, 100, 500];
-const AttendanceList = ({ attandanceList, selectedMonth, selectedSubject }) => {
+const AttendanceList = ({ attandanceList, selectedMonth,studentList,setAttendance,attendance}) => {
   const daysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
   const numberOfDays = daysInMonth(
     moment(selectedMonth).year(),
@@ -32,74 +31,32 @@ const AttendanceList = ({ attandanceList, selectedMonth, selectedSubject }) => {
   }, [daysArray]);
   const [rowData, setRowData] = useState([]);
   const isPresent = (date, STUDENT_ID) => {
-    return attandanceList?.some(
-      (item) => item.ATTENDANCE_DAY === date && item.STUDENT_ID === STUDENT_ID
-    );
-  };
-  const getUniqueRecord = () => {
-    const uniqueRecord = [];
-    const existingUser = new Set();
-    attandanceList?.forEach((record) => {
-      if (!existingUser.has(record.STUDENT_ID)) {
-        existingUser.add(record.STUDENT_ID);
-        uniqueRecord.push(record);
-      }
-    });
-    return uniqueRecord;
+    if(attandanceList?.find(
+      (item) => moment(item.ATTENDANCE_DATE).date() === date && item.STUDENT_ID === STUDENT_ID&&item.PRESENT==1
+    )) return true
+    else return false
   };
   useEffect(() => {
-    if (attandanceList) {
-      const userList = getUniqueRecord();
-      userList.forEach((obj) => {
+      const userList =studentList
+      userList?.forEach((obj) => {
         daysArray.forEach((day) => {
-          obj[day] = isPresent(day, obj.STUDENT_ID);
+          obj[day] =isPresent(day, obj.STUDENT_ID);
         });
       });
       setRowData(userList);
-    }
-  }, [attandanceList, daysArray]);
+  }, [attandanceList, daysArray,studentList]);
   const onMarkAttendance = async (day, STUDENT_ID, presentStatus) => {
     const TeacherId = localStorage.getItem("UserId");
     const date = moment(selectedMonth).format("YYYY-MM");
     const AttendanceDate = moment(`${date}-${day}`, "YYYY-MM-DD").format(
       "YYYY-MM-DD"
     );
-    if (presentStatus) {
-      try {
-        const token = localStorage.getItem("Token");
-        const response = await axios.put(
-          "http://localhost:4000/api/v1/Teacher/PutAttendance",
-          {
-            STUDENT_ID: STUDENT_ID,
-            SUBJECT_ID: selectedSubject,
-            PRESENT: presentStatus,
-            ATTENDANCE_DATE: AttendanceDate,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error.message);
-      }
-    } else {
-      try {
-        const token = localStorage.getItem("Token");
-        const response = await axios.delete(
-          `http://localhost:4000/api/v1/Teacher/RemoveAttendance?STUDENT_ID=${STUDENT_ID}&SUBJECT_ID=${selectedSubject}&ATTENDANCE_DATE=${AttendanceDate}`,
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error.message);
-      }
+    const currentDate=new Date();
+    const formatDate=moment(currentDate).format("YYYY-MM-DD")
+    if(formatDate==AttendanceDate){
+      const array=attendance?.filter((id)=>id!=STUDENT_ID)
+      array?.push(STUDENT_ID);
+      setAttendance(array);
     }
   };
   return (

@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [selectedMonth, setSelectedMonth] = useState();
   const [selectedSubject, setSelectedSubject] = useState();
   const [attandanceList, setAttandanceList] = useState();
+  const [totalPresent, setTotalPresent] = useState(0);
   const [totalPresentData, setTotalPresentData] = useState([]);
   const fetchedAttendanceList = async () => {
     const date = moment(selectedMonth).format("MM/YYYY");
@@ -33,8 +34,11 @@ const Dashboard = () => {
         },
       }
     );
-    const data = list?.data;
-    setAttandanceList(data?.response);
+    const data = list?.data?.response;
+    setAttandanceList(data);
+    data?.map((value)=>{
+      if(value.PRESENT==1)setTotalPresent(prev=>prev+1);
+    })
   };
   const getTotalPresentCountByDay = async () => {
     const date = moment(selectedMonth).format("DD/MM/YYYY");
@@ -59,6 +63,7 @@ const Dashboard = () => {
     setTotalPresentData(list.data.response);
   };
   useEffect(() => {
+    setTotalPresent(0)
     getTotalPresentCountByDay();
     fetchedAttendanceList();
   }, [selectedSubject, selectedMonth]);
@@ -77,6 +82,7 @@ const Dashboard = () => {
                   <div>Select Month</div>
                   <MonthSelection
                     selectedMonth={(value) => setSelectedMonth(value)}
+                    setSelectedMonth={setSelectedMonth}
                   ></MonthSelection>
                 </div>
                 <div className="flex justify-center items-center gap-2">
@@ -92,19 +98,19 @@ const Dashboard = () => {
               selectedMonth={selectedMonth}
               selectedSubject={selectedMonth}
               attandanceList={attandanceList}
-              totalPresentData={totalPresentData}
+              totalPresent={totalPresent}
             ></StatusList>
             <div className="grid grid-cols-1 md:grid-cols-3">
               <div className="md:col-span-2">
                 <BarChartComponent
-                  totalPresentData={totalPresentData}
                   attandanceList={attandanceList}
+                  totalPresentData={totalPresentData}
                 ></BarChartComponent>
               </div>
               <div>
                 <PieChartComponent
-                  totalPresentData={totalPresentData}
                   attandanceList={attandanceList}
+                  totalPresent={totalPresent}
                 ></PieChartComponent>
               </div>
             </div>

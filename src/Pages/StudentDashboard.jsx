@@ -14,8 +14,7 @@ import StudentPieChartComponent from "./Components/StudentPieChartComponent";
 const StudentDashboard = () => {
     const [selectedMonth, setSelectedMonth] = useState();
     const [selectedSubject, setSelectedSubject] = useState();
-    const [attandanceList, setAttandanceList] = useState();
-    const [totalPresentData, setTotalPresentData] = useState([]);
+    const [totalAttendance, setTotalAttendance] = useState([]);
     const getTotalPresentCount= async () => {
       const date = moment(selectedMonth).format("DD/MM/YYYY");
       const MONTH = date.split("/")[1];
@@ -36,7 +35,7 @@ const StudentDashboard = () => {
           },
         }
       );
-      setTotalPresentData(list.data.response);
+      setTotalAttendance(list.data.response);
     };
     useEffect(() => {
         getTotalPresentCount();
@@ -70,20 +69,17 @@ const StudentDashboard = () => {
               <StudentStatusList
                 selectedMonth={selectedMonth}
                 selectedSubject={selectedMonth}
-                attandanceList={attandanceList}
-                totalPresentData={totalPresentData}
+                totalAttendance={totalAttendance}
               ></StudentStatusList>
               <div className="grid grid-cols-1 md:grid-cols-3">
                 <div className="md:col-span-2">
                   <StudentBarChartComponent
-                    totalPresentData={totalPresentData}
-                    attandanceList={attandanceList}
+                    totalAttendance={totalAttendance}
                   ></StudentBarChartComponent>
                 </div>
                 <div>
                   <StudentPieChartComponent
-                    totalPresentData={totalPresentData}
-                    attandanceList={attandanceList}
+                    totalAttendance={totalAttendance}
                   ></StudentPieChartComponent>
                 </div>
               </div>

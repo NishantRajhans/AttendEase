@@ -4,10 +4,9 @@ import React, { useEffect, useState } from 'react';
 import Card from './Card';
 import { GraduationCap, TrendingDown, TrendingUp } from 'lucide-react';
 
-const StatusList = ({selectedMonth,selectedSubject ,attandanceList,totalPresentData}) => {
+const StatusList = ({selectedMonth,selectedSubject ,attandanceList,totalPresent}) => {
     const [totalStudent, setTotalStudent] = useState(0);
     const [presentPercents, setPresentPercents] = useState(0);
-
     const getUniqueRecord = () => {
         const uniqueRecord = [];
         const existingUser = new Set();
@@ -19,12 +18,11 @@ const StatusList = ({selectedMonth,selectedSubject ,attandanceList,totalPresentD
         });
         return uniqueRecord?.length;
     };
-
     useEffect(() => {
         const totalStudents = getUniqueRecord();
         setTotalStudent(totalStudents);
         const today = moment().format('D');
-        const presentPercent = (totalPresentData?.length / (totalStudents * Number(today))) * 100;
+        const presentPercent = (totalPresent/ (totalStudents * Number(today))) * 100;
         setPresentPercents(presentPercent || 0);
     }, [selectedMonth,selectedSubject,attandanceList]);
 
