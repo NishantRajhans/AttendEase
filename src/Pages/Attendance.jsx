@@ -102,11 +102,10 @@ const Attendance = () => {
     MarkAttendance(formatDate)
     toast.success("Attendance taken successfully")
     setAttendance([])
-    onSearchHandelre()
   }
     useEffect(()=>{
       onSearchHandelre()
-    },[selectedSubject])
+    },[selectedSubject||onSubmit])
   return (
     <div className="flex">
       <SideNav></SideNav>
