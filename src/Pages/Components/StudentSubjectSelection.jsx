@@ -5,7 +5,7 @@ const StudentSubjectSelection = ({setSelectedSubject}) => {
     const getSubject = async () => {
       try {
         const token=localStorage.getItem('Token');
-        const response = await axios.get("https://attendease-backend-cski.onrender.com/api/v1/Student/GetGradeSubject",{
+        const response = await axios.get("https://attendease-backend-jom0.onrender.com/api/v1/Student/GetGradeSubject",{
           headers:{
           'Authorization':"Bearer "+token,
           'Content-Type':'application/json'

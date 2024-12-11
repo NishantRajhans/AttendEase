@@ -25,7 +25,7 @@ const AddNewStudent = ({ fetchStudentList, grades }) => {
   const submitHandler = async (data) => {
     try {
       const response = await axios.post(
-        "https://attendease-backend-cski.onrender.com/api/v1/Admin/AddStudent",
+        "https://attendease-backend-jom0.onrender.com/api/v1/Admin/AddStudent",
         {
           NAME: data.NAME,
           EMAIL: data.EMAIL,

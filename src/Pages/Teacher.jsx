@@ -7,7 +7,7 @@ import axios from "axios";
 const Teacher = () => {
   const [Teacherslist, setTeacherslist] = useState();
   const fetchTeacherList = async () => {
-    const Teacher=await axios.get("https://attendease-backend-cski.onrender.com/api/v1/Admin/GetAllTeacher",{
+    const Teacher=await axios.get("https://attendease-backend-jom0.onrender.com/api/v1/Admin/GetAllTeacher",{
       headers:{
         "Content-Type":"application/json",
         "Authorization":"Bearer "+localStorage.getItem("Token")

@@ -32,7 +32,7 @@ export default function Login() {
   const submitHandler = async (data) => {
     try {
       const response = await axios.post(
-        `https://attendease-backend-cski.onrender.com/api/v1/${data.ROLE}/SignIn`,
+        `https://attendease-backend-jom0.onrender.com/api/v1/${data.ROLE}/SignIn`,
         {
           EMAIL: data.EMAIL,
           PASSWORD: data.PASSWORD,

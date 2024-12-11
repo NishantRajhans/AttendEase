@@ -25,7 +25,7 @@ const EditButton = ({ data, fetchStudentList, grades }) => {
   const HandleEdit = async (dataValue, id) => {
     try {
       const response = await axios.put(
-        `https://attendease-backend-cski.onrender.com/api/v1/Admin/EditStudent/${id}`,
+        `https://attendease-backend-jom0.onrender.com/api/v1/Admin/EditStudent/${id}`,
         {
           NAME: dataValue.NAME,
           EMAIL: dataValue.EMAIL,

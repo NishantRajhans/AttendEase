@@ -22,7 +22,7 @@ const StudentDashboard = () => {
       const Token = localStorage.getItem("Token");
       const SUBJECT_ID = selectedSubject;
       const list = await axios.get(
-        "https://attendease-backend-cski.onrender.com/api/v1/Student/GetGradeSubjectAttedance?SUBJECT_ID=" +
+        "https://attendease-backend-jom0.onrender.com/api/v1/Student/GetGradeSubjectAttedance?SUBJECT_ID=" +
           SUBJECT_ID +
           "&MONTH=" +
           MONTH +
