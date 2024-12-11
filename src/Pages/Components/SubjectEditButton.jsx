@@ -26,7 +26,7 @@ const SubjectEditButton = ({ data, fetchSubjectList }) => {
     try {
       console.log(Valuedata, id);
       const response = await axios.put(
-        `http://localhost:4000/api/v1/Admin/EditSubject/${id}`,
+        `https://attendease-backend-cski.onrender.com/api/v1/Admin/EditSubject/${id}`,
         {
           NAME: Valuedata.NAME,
           EMAIL: Valuedata.EMAIL,

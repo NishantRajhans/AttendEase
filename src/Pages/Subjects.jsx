@@ -8,7 +8,7 @@ const Subject = () => {
   const [Subjectslist, setSubjectslist] = useState();
   const [grades, setGrades] = useState([]);
   const fetchSubjectList = async () => {
-    const Subject=await axios.get("http://localhost:4000/api/v1/Admin/GetAllSubject",{
+    const Subject=await axios.get("https://attendease-backend-cski.onrender.com/api/v1/Admin/GetAllSubject",{
       headers:{
         "Content-Type": "application/json",
         "Authorization": "Bearer "+localStorage.getItem("Token")
@@ -19,7 +19,7 @@ const Subject = () => {
   const [Teacherslist, setTeacherslist] = useState();
   const fetchTeacherList = async () => {
     const Teacher = await axios.get(
-      "http://localhost:4000/api/v1/Admin/GetAllTeacher",{
+      "https://attendease-backend-cski.onrender.com/api/v1/Admin/GetAllTeacher",{
         headers:{
           "Content-Type": "application/json",
           "Authorization": "Bearer "+localStorage.getItem("Token")
@@ -30,7 +30,7 @@ const Subject = () => {
   };
   const getGrades = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/Admin/GetAllGrade",{
+      const response = await axios.get("https://attendease-backend-cski.onrender.com/api/v1/Admin/GetAllGrade",{
         headers:{
           "Content-Type": "application/json",
           "Authorization": "Bearer "+localStorage.getItem("Token")

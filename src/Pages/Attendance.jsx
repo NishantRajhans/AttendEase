@@ -24,7 +24,7 @@ const Attendance = () => {
           try {
             const token = localStorage.getItem("Token");
             const response = await axios.put(
-              "http://localhost:4000/api/v1/Teacher/PutAttendance",
+              "https://attendease-backend-cski.onrender.com/api/v1/Teacher/PutAttendance",
               {
                 STUDENT_ID: STUDENT.STUDENT_ID,
                 SUBJECT_ID: selectedSubject,
@@ -45,7 +45,7 @@ const Attendance = () => {
           try {
             const token = localStorage.getItem("Token");
             const response = await axios.put(
-              "http://localhost:4000/api/v1/Teacher/PutAttendance",
+              "https://attendease-backend-cski.onrender.com/api/v1/Teacher/PutAttendance",
               {
                 STUDENT_ID: STUDENT.STUDENT_ID,
                 SUBJECT_ID: selectedSubject,
@@ -72,7 +72,7 @@ const Attendance = () => {
       const Token=localStorage.getItem('Token');
       const Subject_id=selectedSubject
       try{
-        const list=await axios.get("http://localhost:4000/api/v1/Teacher/FetchAttendance?Subject="+Subject_id+"&Month="+Month+"&Year="+Year,{headers:{
+        const list=await axios.get("https://attendease-backend-cski.onrender.com/api/v1/Teacher/FetchAttendance?Subject="+Subject_id+"&Month="+Month+"&Year="+Year,{headers:{
           'Authorization':"Bearer "+Token,
           'Content-Type':'application/json'
         }})
@@ -83,7 +83,7 @@ const Attendance = () => {
       }
       try{
         const response = await axios.get(
-          "http://localhost:4000/api/v1/Teacher/FetchStudentOfParticularSubject?SUBJECT_ID="+Subject_id,
+          "https://attendease-backend-cski.onrender.com/api/v1/Teacher/FetchStudentOfParticularSubject?SUBJECT_ID="+Subject_id,
           {
             headers: {
               "Content-Type": "application/json",

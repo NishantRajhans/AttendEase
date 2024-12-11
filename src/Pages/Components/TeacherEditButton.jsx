@@ -25,7 +25,7 @@ const TeacherEditButton = ({ data, fetchTeacherList }) => {
   const HandleEdit = async (data, id) => {
     try {
       const response = await axios.put(
-        `http://localhost:4000/api/v1/Admin/EditTeacher/${id}`,
+        `https://attendease-backend-cski.onrender.com/api/v1/Admin/EditTeacher/${id}`,
         {
           NAME: data.NAME,
           EMAIL: data.EMAIL,

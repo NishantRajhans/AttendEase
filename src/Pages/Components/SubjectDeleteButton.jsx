@@ -23,7 +23,7 @@ const SubjectDeleteButton = ({ data, fetchSubjectList }) => {
       const TEACHER_ID = value.data.TEACHER_ID;
       const SUBJECT_ID = value.data.SUBJECT_ID;
       const response = await axios.delete(
-        `http://localhost:4000/api/v1/Admin/DeleteSubject?Subject=${SUBJECT_ID}&Grade=${GRADE_ID}&Teacher=${TEACHER_ID}`,
+        `https://attendease-backend-cski.onrender.com/api/v1/Admin/DeleteSubject?Subject=${SUBJECT_ID}&Grade=${GRADE_ID}&Teacher=${TEACHER_ID}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("Token"),

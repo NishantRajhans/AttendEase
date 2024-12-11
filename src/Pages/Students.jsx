@@ -8,7 +8,7 @@ const Students = () => {
   const [Studentlist, setStudentlist] = useState();
   const [grades, setGrades] = useState([]);
   const fetchStudentList = async () => {
-    const Student=await axios.get("http://localhost:4000/api/v1/Admin/GetAllStudent",{
+    const Student=await axios.get("https://attendease-backend-cski.onrender.com/api/v1/Admin/GetAllStudent",{
       headers:{
         "Content-Type": "application/json",
         "Authorization": "Bearer "+localStorage.getItem("Token")
@@ -18,7 +18,7 @@ const Students = () => {
   };
     const getGrades = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/Admin/GetAllGrade",{
+        const response = await axios.get("https://attendease-backend-cski.onrender.com/api/v1/Admin/GetAllGrade",{
           headers:{
             "Content-Type": "application/json",
             "Authorization": "Bearer "+localStorage.getItem("Token")

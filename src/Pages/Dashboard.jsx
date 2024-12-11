@@ -21,7 +21,7 @@ const Dashboard = () => {
     const Token = localStorage.getItem("Token");
     const Subject = selectedSubject;
     const list = await axios.get(
-      "http://localhost:4000/api/v1/Teacher/FetchAttendance?Subject=" +
+      "https://attendease-backend-cski.onrender.com/api/v1/Teacher/FetchAttendance?Subject=" +
         Subject +
         "&Month=" +
         Month +
@@ -47,7 +47,7 @@ const Dashboard = () => {
     const Token = localStorage.getItem("Token");
     const Subject = selectedSubject;
     const list = await axios.get(
-      "http://localhost:4000/api/v1/Teacher/FetchTotalPresent?Subject=" +
+      "https://attendease-backend-cski.onrender.com/api/v1/Teacher/FetchTotalPresent?Subject=" +
         Subject +
         "&Month=" +
         Month +

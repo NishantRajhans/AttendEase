@@ -25,7 +25,7 @@ const AddNewStudent = ({ fetchSubjectList, Teacherslist, grades }) => {
   const submitHandler = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/Admin/AddSubject",
+        "https://attendease-backend-cski.onrender.com/api/v1/Admin/AddSubject",
         {
           GRADE_ID: data.GRADE_ID,
           SUBJECT_NAME: data.SUBJECT_NAME,
