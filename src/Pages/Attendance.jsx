@@ -105,7 +105,7 @@ const Attendance = () => {
   }
     useEffect(()=>{
       onSearchHandelre()
-    },[selectedSubject||onSubmit])
+    },[selectedSubject])
   return (
     <div className="flex">
       <SideNav></SideNav>

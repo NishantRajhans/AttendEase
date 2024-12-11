@@ -2,8 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { ResponsiveContainer,CartesianGrid,XAxis,YAxis,Tooltip,Legend,Bar,BarChart} from "recharts";
 
-const BarChartComponent = ({attandanceList,totalPresentData,setAttandanceList,
-  setTotalPresentData}) => {
+const BarChartComponent = ({attandanceList,totalPresentData}) => {
     const [data,setData]=useState([])
     const getUniqueRecord = () => {
         const uniqueRecord = [];
@@ -28,7 +27,7 @@ const BarChartComponent = ({attandanceList,totalPresentData,setAttandanceList,
     }
     useEffect(()=>{
       AttendanceListCount();
-    },[attandanceList||totalPresentData||setAttandanceList||setTotalPresentData])
+    },[attandanceList||totalPresentData])
   return (
     <div className="p-5 border rounded-lg shadow-sm">
         <h2 className="my-2 font-bold text-lg">Attendance</h2>
