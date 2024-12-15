@@ -14,6 +14,7 @@ import {
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
+const API=process.env.REACT_APP_API_URL
 const TeacherEditButton = ({ data, fetchTeacherList }) => {
   const [open, setOpen] = useState(false);
   const {
@@ -25,7 +26,7 @@ const TeacherEditButton = ({ data, fetchTeacherList }) => {
   const HandleEdit = async (data, id) => {
     try {
       const response = await axios.put(
-        `https://attendease-backend-jom0.onrender.com/api/v1/Admin/EditTeacher/${id}`,
+        `${API}/api/v1/Admin/EditTeacher/${id}`,
         {
           NAME: data.NAME,
           EMAIL: data.EMAIL,

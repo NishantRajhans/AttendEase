@@ -4,11 +4,12 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import axios from "axios";
 import StudentList from "./Components/StudentList";
+const API=process.env.REACT_APP_API_URL
 const Students = () => {
   const [Studentlist, setStudentlist] = useState();
   const [grades, setGrades] = useState([]);
   const fetchStudentList = async () => {
-    const Student=await axios.get("https://attendease-backend-jom0.onrender.com/api/v1/Admin/GetAllStudent",{
+    const Student=await axios.get(`${API}/api/v1/Admin/GetAllStudent`,{
       headers:{
         "Content-Type": "application/json",
         "Authorization": "Bearer "+localStorage.getItem("Token")
@@ -18,7 +19,7 @@ const Students = () => {
   };
     const getGrades = async () => {
       try {
-        const response = await axios.get("https://attendease-backend-jom0.onrender.com/api/v1/Admin/GetAllGrade",{
+        const response = await axios.get(`${API}/api/v1/Admin/GetAllGrade`,{
           headers:{
             "Content-Type": "application/json",
             "Authorization": "Bearer "+localStorage.getItem("Token")

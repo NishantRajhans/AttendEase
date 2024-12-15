@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+const API=process.env.REACT_APP_API_URL
 const StudentSubjectSelection = ({setSelectedSubject}) => {
     const [Subject, setSubject] = useState([]);
     const getSubject = async () => {
       try {
         const token=localStorage.getItem('Token');
-        const response = await axios.get("https://attendease-backend-jom0.onrender.com/api/v1/Student/GetGradeSubject",{
+        const response = await axios.get(`${API}/api/v1/Student/GetGradeSubject`,{
           headers:{
           'Authorization':"Bearer "+token,
           'Content-Type':'application/json'

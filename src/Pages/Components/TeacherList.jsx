@@ -5,19 +5,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import AddNewTeacher from "./AddNewTeacher";
-import { Search, Trash, Pencil } from "lucide-react";
-import { Button } from "../../components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-} from "../../components/ui/dialog";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import { Search} from "lucide-react";
 import TeacherEditButton from "./TeacherEditButton";
 import TeacherDeleteButton from "./TeacherDeleteButton";
 const pagination = true;

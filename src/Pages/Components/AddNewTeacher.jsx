@@ -12,6 +12,7 @@ import { Input } from "../../components/ui/input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
+const API=process.env.REACT_APP_API_URL
 const AddNewStudent = ({ fetchTeacherList, setTeacherlist }) => {
   const [open, setOpen] = useState(false);
   const {
@@ -23,7 +24,7 @@ const AddNewStudent = ({ fetchTeacherList, setTeacherlist }) => {
   const HandleSubmit = async (data, id) => {
     try {
       const response = await axios.post(
-        `https://attendease-backend-jom0.onrender.com/api/v1/Admin/AddTeacher`,
+        `${API}/api/v1/Admin/AddTeacher`,
         {
           NAME: data.NAME,
           EMAIL: data.EMAIL,

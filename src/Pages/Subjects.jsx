@@ -4,11 +4,12 @@ import SubjectList from "./Components/SubjectList";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import axios from "axios";
+const API=process.env.REACT_APP_API_URL
 const Subject = () => {
   const [Subjectslist, setSubjectslist] = useState();
   const [grades, setGrades] = useState([]);
   const fetchSubjectList = async () => {
-    const Subject=await axios.get("https://attendease-backend-jom0.onrender.com/api/v1/Admin/GetAllSubject",{
+    const Subject=await axios.get(`${API}/api/v1/Admin/GetAllSubject`,{
       headers:{
         "Content-Type": "application/json",
         "Authorization": "Bearer "+localStorage.getItem("Token")
@@ -19,7 +20,7 @@ const Subject = () => {
   const [Teacherslist, setTeacherslist] = useState();
   const fetchTeacherList = async () => {
     const Teacher = await axios.get(
-      "https://attendease-backend-jom0.onrender.com/api/v1/Admin/GetAllTeacher",{
+      `${API}/api/v1/Admin/GetAllTeacher`,{
         headers:{
           "Content-Type": "application/json",
           "Authorization": "Bearer "+localStorage.getItem("Token")
@@ -30,7 +31,7 @@ const Subject = () => {
   };
   const getGrades = async () => {
     try {
-      const response = await axios.get("https://attendease-backend-jom0.onrender.com/api/v1/Admin/GetAllGrade",{
+      const response = await axios.get(`${API}/api/v1/Admin/GetAllGrade`,{
         headers:{
           "Content-Type": "application/json",
           "Authorization": "Bearer "+localStorage.getItem("Token")

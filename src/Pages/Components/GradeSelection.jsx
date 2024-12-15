@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+const API=process.env.REACT_APP_API_URL
 const GradeSelection = ({ selectedGrade }) => {
   const [grades, setGrades] = useState([]);
   const getGrades = async () => {
     try {
-      const response = await axios.get("/api/grade");
+      const response = await axios.get(`${API}/api/v1/Admin/GetAllGrade`);
       const gradeData = response.data;
       setGrades(gradeData.data || []);
     } catch (error) {

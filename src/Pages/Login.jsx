@@ -20,7 +20,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+const API=process.env.REACT_APP_API_URL
 export default function Login() {
   const {
     register,
@@ -32,7 +32,7 @@ export default function Login() {
   const submitHandler = async (data) => {
     try {
       const response = await axios.post(
-        `https://attendease-backend-jom0.onrender.com/api/v1/${data.ROLE}/SignIn`,
+        `${API}/api/v1/${data.ROLE}/SignIn`,
         {
           EMAIL: data.EMAIL,
           PASSWORD: data.PASSWORD,

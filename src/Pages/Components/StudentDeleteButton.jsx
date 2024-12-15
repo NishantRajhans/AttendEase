@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 const DeleteButton = ({data,fetchStudentList}) => {
       const HandleDelete=async (id)=>{
         try{
-          const response=await axios.delete(`https://attendease-backend-jom0.onrender.com/api/v1/Admin/DeleteStudent/${id}`,{
+          const response=await axios.delete(`${API}/api/v1/Admin/DeleteStudent/${id}`,{
             headers:{
               "Authorization": "Bearer "+localStorage.getItem("Token")
             }

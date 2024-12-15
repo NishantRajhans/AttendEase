@@ -8,6 +8,7 @@ import MonthSelection from "./Components/MonthSelection";
 import { useState, useEffect } from "react";
 import moment from "moment";
 import axios from "axios";
+const API=process.env.REACT_APP_API_URL
 const Dashboard = () => {
   const [selectedMonth, setSelectedMonth] = useState();
   const [selectedSubject, setSelectedSubject] = useState();
@@ -21,7 +22,7 @@ const Dashboard = () => {
     const Token = localStorage.getItem("Token");
     const Subject = selectedSubject;
     const list = await axios.get(
-      "https://attendease-backend-jom0.onrender.com/api/v1/Teacher/FetchAttendance?Subject=" +
+      `${API}/api/v1/Teacher/FetchAttendance?Subject=` +
         Subject +
         "&Month=" +
         Month +
@@ -47,7 +48,7 @@ const Dashboard = () => {
     const Token = localStorage.getItem("Token");
     const Subject = selectedSubject;
     const list = await axios.get(
-      "https://attendease-backend-jom0.onrender.com/api/v1/Teacher/FetchTotalPresent?Subject=" +
+      `${API}/api/v1/Teacher/FetchTotalPresent?Subject=` +
         Subject +
         "&Month=" +
         Month +

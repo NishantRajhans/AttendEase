@@ -1,8 +1,5 @@
 import React from "react";
 import SideNav from "./Components/SideNavBar";
-import BarChartComponent from "./Components/BarChartComponent";
-import PieChartComponent from "./Components/PieChartComponent";
-import StatusList from "./Components/StatusList";
 import MonthSelection from "./Components/MonthSelection";
 import { useState, useEffect } from "react";
 import moment from "moment";
@@ -11,6 +8,7 @@ import StudentSubjectSelection from "./Components/StudentSubjectSelection";
 import StudentStatusList from "./Components/StudentStatusList";
 import StudentBarChartComponent from "./Components/StudentBarChartComponent";
 import StudentPieChartComponent from "./Components/StudentPieChartComponent";
+const API=process.env.REACT_APP_API_URL
 const StudentDashboard = () => {
     const [selectedMonth, setSelectedMonth] = useState();
     const [selectedSubject, setSelectedSubject] = useState();
@@ -22,7 +20,7 @@ const StudentDashboard = () => {
       const Token = localStorage.getItem("Token");
       const SUBJECT_ID = selectedSubject;
       const list = await axios.get(
-        "https://attendease-backend-jom0.onrender.com/api/v1/Student/GetGradeSubjectAttedance?SUBJECT_ID=" +
+        `${API}/api/v1/Student/GetGradeSubjectAttedance?SUBJECT_ID=` +
           SUBJECT_ID +
           "&MONTH=" +
           MONTH +

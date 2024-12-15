@@ -16,6 +16,7 @@ import {
 } from "../../components/ui/alert-dialog";
 import axios from "axios";
 import { toast } from "react-toastify";
+const API=process.env.REACT_APP_API_URL
 const SubjectDeleteButton = ({ data, fetchSubjectList }) => {
   const HandleDelete = async (value) => {
     try {
@@ -23,7 +24,7 @@ const SubjectDeleteButton = ({ data, fetchSubjectList }) => {
       const TEACHER_ID = value.data.TEACHER_ID;
       const SUBJECT_ID = value.data.SUBJECT_ID;
       const response = await axios.delete(
-        `https://attendease-backend-jom0.onrender.com/api/v1/Admin/DeleteSubject?Subject=${SUBJECT_ID}&Grade=${GRADE_ID}&Teacher=${TEACHER_ID}`,
+        `${API}/api/v1/Admin/DeleteSubject?Subject=${SUBJECT_ID}&Grade=${GRADE_ID}&Teacher=${TEACHER_ID}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("Token"),

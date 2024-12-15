@@ -4,10 +4,11 @@ import TeacherList from "./Components/TeacherList";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import axios from "axios";
+const API=process.env.REACT_APP_API_URL
 const Teacher = () => {
   const [Teacherslist, setTeacherslist] = useState();
   const fetchTeacherList = async () => {
-    const Teacher=await axios.get("https://attendease-backend-jom0.onrender.com/api/v1/Admin/GetAllTeacher",{
+    const Teacher=await axios.get(`${API}/api/v1/Admin/GetAllTeacher`,{
       headers:{
         "Content-Type":"application/json",
         "Authorization":"Bearer "+localStorage.getItem("Token")

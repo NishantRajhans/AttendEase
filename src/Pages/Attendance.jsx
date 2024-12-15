@@ -8,6 +8,7 @@ import SubjectSelection from "./Components/SubjectSlection";
 import moment from "moment";
 import axios from "axios";
 import { toast } from "react-toastify";
+const API=process.env.REACT_APP_API_URL
 const Attendance = () => {
   const [selectedMonth,setSelectedMonth]=useState();
     const [selectedSubject,setSelectedSubject]=useState();
@@ -24,7 +25,7 @@ const Attendance = () => {
           try {
             const token = localStorage.getItem("Token");
             const response = await axios.put(
-              "https://attendease-backend-jom0.onrender.com/api/v1/Teacher/PutAttendance",
+              `${API}/api/v1/Teacher/PutAttendance`,
               {
                 STUDENT_ID: STUDENT.STUDENT_ID,
                 SUBJECT_ID: selectedSubject,
@@ -45,7 +46,7 @@ const Attendance = () => {
           try {
             const token = localStorage.getItem("Token");
             const response = await axios.put(
-              "https://attendease-backend-jom0.onrender.com/api/v1/Teacher/PutAttendance",
+              `${API}/api/v1/Teacher/PutAttendance`,
               {
                 STUDENT_ID: STUDENT.STUDENT_ID,
                 SUBJECT_ID: selectedSubject,
@@ -72,7 +73,7 @@ const Attendance = () => {
       const Token=localStorage.getItem('Token');
       const Subject_id=selectedSubject
       try{
-        const list=await axios.get("https://attendease-backend-jom0.onrender.com/api/v1/Teacher/FetchAttendance?Subject="+Subject_id+"&Month="+Month+"&Year="+Year,{headers:{
+        const list=await axios.get(`${API}/api/v1/Teacher/FetchAttendance?Subject=`+Subject_id+"&Month="+Month+"&Year="+Year,{headers:{
           'Authorization':"Bearer "+Token,
           'Content-Type':'application/json'
         }})
@@ -83,7 +84,7 @@ const Attendance = () => {
       }
       try{
         const response = await axios.get(
-          "https://attendease-backend-jom0.onrender.com/api/v1/Teacher/FetchStudentOfParticularSubject?SUBJECT_ID="+Subject_id,
+          `${API}/api/v1/Teacher/FetchStudentOfParticularSubject?SUBJECT_ID=`+Subject_id,
           {
             headers: {
               "Content-Type": "application/json",

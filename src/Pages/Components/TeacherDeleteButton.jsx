@@ -16,10 +16,11 @@ import {
 } from "../../components/ui/alert-dialog";
 import axios from "axios";
 import { toast } from "react-toastify";
+const API=process.env.REACT_APP_API_URL
 const TeacherDeleteButton = ({data,fetchTeacherList}) => {
     const HandleDelete=async (id)=>{
         try{
-          const response=await axios.delete(`https://attendease-backend-jom0.onrender.com/api/v1/Admin/DeleteTeacher/${id}`,{
+          const response=await axios.delete(`${API}/api/v1/Admin/DeleteTeacher/${id}`,{
             headers:{
               "Authorization": "Bearer "+localStorage.getItem("Token")
             }
