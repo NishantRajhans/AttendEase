@@ -16,6 +16,7 @@ import {
 } from "../../components/ui/alert-dialog";
 import axios from "axios";
 import { toast } from "react-toastify";
+const API=process.env.REACT_APP_API_URL
 const DeleteButton = ({data,fetchStudentList}) => {
       const HandleDelete=async (id)=>{
         try{
@@ -48,7 +49,7 @@ const DeleteButton = ({data,fetchStudentList}) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={() =>HandleDelete(data.STUDENT_ID)}>
+              <AlertDialogAction onClick={() =>HandleDelete(data.studentId)}>
                 Continue
               </AlertDialogAction>
             </AlertDialogFooter>

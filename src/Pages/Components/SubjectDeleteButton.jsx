@@ -20,11 +20,11 @@ const API=process.env.REACT_APP_API_URL
 const SubjectDeleteButton = ({ data, fetchSubjectList }) => {
   const HandleDelete = async (value) => {
     try {
-      const GRADE_ID = value.data.GRADE_ID;
-      const TEACHER_ID = value.data.TEACHER_ID;
-      const SUBJECT_ID = value.data.SUBJECT_ID;
+      const gradeId = value.data.gradeId;
+      const teacherId = value.data.teacherId;
+      const subjectId = value.data.subjectId;
       const response = await axios.delete(
-        `${API}/api/v1/Admin/DeleteSubject?Subject=${SUBJECT_ID}&Grade=${GRADE_ID}&Teacher=${TEACHER_ID}`,
+        `${API}/api/v1/Admin/DeleteSubject?subjectId=${subjectId}&gradeId=${gradeId}&teacherId=${teacherId}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("Token"),

@@ -17,20 +17,20 @@ const Attendance = () => {
     const [studentList,setStudentList]=useState();
     const MarkAttendance=async (AttendanceDate)=>{
       const normalizedData =studentList.map(item => ({
-        STUDENT_ID: item.STUDENT_ID,
-        NAME: item.NAME,
+        studentId: item.studentId,
+        name: item.name,
       }));
       normalizedData .map(async(STUDENT)=>{
-        if(attendance.find(id=>id=== STUDENT.STUDENT_ID)!=undefined){
+        if(attendance.find(id=>id=== STUDENT.studentId)!=undefined){
           try {
             const token = localStorage.getItem("Token");
             const response = await axios.put(
               `${API}/api/v1/Teacher/PutAttendance`,
               {
-                STUDENT_ID: STUDENT.STUDENT_ID,
-                SUBJECT_ID: selectedSubject,
-                PRESENT: true,
-                ATTENDANCE_DATE: AttendanceDate,
+                studentId: STUDENT.studentId,
+                subjectId: selectedSubject,
+                present: true,
+                attendanceDate: AttendanceDate,
               },
               {
                 headers: {
@@ -48,10 +48,10 @@ const Attendance = () => {
             const response = await axios.put(
               `${API}/api/v1/Teacher/PutAttendance`,
               {
-                STUDENT_ID: STUDENT.STUDENT_ID,
-                SUBJECT_ID: selectedSubject,
-                PRESENT: false,
-                ATTENDANCE_DATE: AttendanceDate,
+                studentId: STUDENT.studentId,
+                subjectId: selectedSubject,
+                present: false,
+                attendanceDate: AttendanceDate,
               },
               {
                 headers: {
@@ -71,9 +71,9 @@ const Attendance = () => {
       const Month=date.split('/')[0];
       const Year=date.split('/')[1];
       const Token=localStorage.getItem('Token');
-      const Subject_id=selectedSubject
+      const subjectId=selectedSubject
       try{
-        const list=await axios.get(`${API}/api/v1/Teacher/FetchAttendance?Subject=`+Subject_id+"&Month="+Month+"&Year="+Year,{headers:{
+        const list=await axios.get(`${API}/api/v1/Teacher/FetchAttendance?subjectId=`+subjectId+"&month="+Month+"&year="+Year,{headers:{
           'Authorization':"Bearer "+Token,
           'Content-Type':'application/json'
         }})
@@ -84,7 +84,7 @@ const Attendance = () => {
       }
       try{
         const response = await axios.get(
-          `${API}/api/v1/Teacher/FetchStudentOfParticularSubject?SUBJECT_ID=`+Subject_id,
+          `${API}/api/v1/Teacher/FetchStudentOfParticularSubject?subjectId=`+subjectId,
           {
             headers: {
               "Content-Type": "application/json",

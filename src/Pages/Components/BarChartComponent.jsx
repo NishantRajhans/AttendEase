@@ -8,8 +8,8 @@ const BarChartComponent = ({attandanceList,totalPresentData}) => {
         const uniqueRecord = [];
         const existingUser = new Set();
         attandanceList?.forEach((record) => {
-          if (!existingUser.has(record.STUDENT_ID)) {
-            existingUser.add(record.STUDENT_ID);
+          if (!existingUser.has(record.studentId)) {
+            existingUser.add(record.studentId);
             uniqueRecord.push(record);
           }
         });
@@ -17,9 +17,8 @@ const BarChartComponent = ({attandanceList,totalPresentData}) => {
       };
     const AttendanceListCount=()=>{
         const totalStudent=getUniqueRecord();
-        console.log(totalPresentData)
         const result=totalPresentData?.map((item)=>({
-            day:item.ATTENDANCE_DAY,
+            day:item.attendanceDay,
             presentCount:item.presentCount,
             absentCount:Number(totalStudent?.length)-Number(item.presentCount)
         }))
@@ -27,7 +26,10 @@ const BarChartComponent = ({attandanceList,totalPresentData}) => {
     }
     useEffect(()=>{
       AttendanceListCount();
-    },[attandanceList||totalPresentData])
+    },[attandanceList])
+    useEffect(()=>{
+      AttendanceListCount();
+    },[totalPresentData])
   return (
     <div className="p-5 border rounded-lg shadow-sm">
         <h2 className="my-2 font-bold text-lg">Attendance</h2>

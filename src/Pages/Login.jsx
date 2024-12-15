@@ -32,17 +32,16 @@ export default function Login() {
   const submitHandler = async (data) => {
     try {
       const response = await axios.post(
-        `${API}/api/v1/${data.ROLE}/SignIn`,
+        `${API}/api/v1/${data.role}/SignIn`,
         {
-          EMAIL: data.EMAIL,
-          PASSWORD: data.PASSWORD,
-          ROLE: data.ROLE,
+          email: data.email,
+          password: data.password,
+          role: data.role,
         }
       );
       if (response.data.success === true) {
-        localStorage.setItem("UserId", response.data.user.USER_ID);
-        localStorage.setItem("UserName", response.data.user.NAME);
-        localStorage.setItem("UserEmail", response.data.user.EMAIL);
+        localStorage.setItem("UserName", response.data.user.name);
+        localStorage.setItem("UserEmail", response.data.user.email);
         localStorage.setItem("Token", response.data.token);
         localStorage.setItem("Role", response.data.role);
         toast.success(response.data.message);
@@ -70,24 +69,24 @@ export default function Login() {
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">email</Label>
                 <Input
                   id="email"
-                  placeholder="Enter Your Email"
-                  {...register("EMAIL", { required: true })}
+                  placeholder="Enter Your email"
+                  {...register("email", { required: true })}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">password</Label>
                 <Input
                   id="password"
-                  placeholder="Enter Your Password"
-                  {...register("PASSWORD", { required: true })}
+                  placeholder="Enter Your password"
+                  {...register("password", { required: true })}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="framework">Role</Label>
-                <Select onValueChange={(value) => setValue("ROLE", value)}>
+                <Label htmlFor="framework">role</Label>
+                <Select onValueChange={(value) => setValue("role", value)}>
                   <SelectTrigger id="framework">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>

@@ -16,9 +16,9 @@ const StudentBarChartComponent = ({ totalAttendance }) => {
 
   const AttendanceListCount = () => {
     const result = totalAttendance?.map((item) => ({
-      day: moment(item.ATTENDANCE_DATE).date(),
-      present: item.PRESENT == 1 ? 1 : 0,
-      absent: item.PRESENT == 0 ? 1 : 0,
+      day: moment(item.attendanceDate).date(),
+      present: item.present == 1 ? 1 : 0,
+      absent: item.present == 0 ? 1 : 0,
     }));
     setData(result);
   };

@@ -13,7 +13,7 @@ const SubjectSelection = ({setSelectedSubject}) => {
       }});
       const subjectData = response.data;
       setSubject(subjectData.response || []);
-      setSelectedSubject(subjectData.response[0].SUBJECT_ID)
+      setSelectedSubject(subjectData.response[0].subjectId)
     } catch (error) {
       console.error("Error fetching Subject:", error);
     }
@@ -29,8 +29,8 @@ const SubjectSelection = ({setSelectedSubject}) => {
           onChange={(event)=>setSelectedSubject(event.target.value)}
         >
           {Subject?.map((subject, index) => (
-            <option key={index} value={subject.SUBJECT_ID}>
-              {subject.SUBJECT_NAME}
+            <option key={index} value={subject.subjectId}>
+              {subject.subjectName}
             </option>
           ))}
         </select>

@@ -22,11 +22,11 @@ const Dashboard = () => {
     const Token = localStorage.getItem("Token");
     const Subject = selectedSubject;
     const list = await axios.get(
-      `${API}/api/v1/Teacher/FetchAttendance?Subject=` +
+      `${API}/api/v1/Teacher/FetchAttendance?subjectId=` +
         Subject +
-        "&Month=" +
+        "&month=" +
         Month +
-        "&Year=" +
+        "&year=" +
         Year,
       {
         headers: {
@@ -35,10 +35,10 @@ const Dashboard = () => {
         },
       }
     );
-    const data = list?.data?.response;
-    setAttandanceList(data);
-    data?.map((value)=>{
-      if(value.PRESENT==1)setTotalPresent(prev=>prev+1);
+    const value = list?.data?.response||[];
+    setAttandanceList(value);
+    value?.map((val)=>{
+      if(val.present==1)setTotalPresent((prev)=>prev+1);
     })
   };
   const getTotalPresentCountByDay = async () => {
@@ -48,11 +48,11 @@ const Dashboard = () => {
     const Token = localStorage.getItem("Token");
     const Subject = selectedSubject;
     const list = await axios.get(
-      `${API}/api/v1/Teacher/FetchTotalPresent?Subject=` +
+      `${API}/api/v1/Teacher/FetchTotalPresent?subjectId=` +
         Subject +
-        "&Month=" +
+        "&month=" +
         Month +
-        "&Year=" +
+        "&year=" +
         Year,
       {
         headers: {

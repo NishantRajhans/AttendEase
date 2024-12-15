@@ -27,12 +27,12 @@ const AddNewStudent = ({ fetchStudentList, grades }) => {
       const response = await axios.post(
         `${API}/api/v1/Admin/AddStudent`,
         {
-          NAME: data.NAME,
-          EMAIL: data.EMAIL,
-          PASSWORD: data.PASSWORD,
-          PHONENUMBER: data.PHONENUMBER,
-          ADDRESS: data.ADDRESS,
-          GRADE: data.GRADE,
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          phoneNumber: data.phoneNumber,
+          address: data.address,
+          grade: data.grade,
         },
         {
           headers: {
@@ -71,9 +71,9 @@ const AddNewStudent = ({ fetchStudentList, grades }) => {
                   </label>
                   <Input
                     id="fullname"
-                    placeholder="Enter Full Name"
+                    placeholder="Enter Full name"
                     className="col-span-3"
-                    {...register("NAME", { required: true })}
+                    {...register("name", { required: true })}
                   />
                 </div>
                 <div className="flex-col py-3">
@@ -85,7 +85,7 @@ const AddNewStudent = ({ fetchStudentList, grades }) => {
                     id="contact"
                     placeholder="Enter Contact Number"
                     className="col-span-3"
-                    {...register("PHONENUMBER", { required: true })}
+                    {...register("phoneNumber", { required: true })}
                   />
                 </div>
                 <div className="flex-col py-3">
@@ -94,9 +94,9 @@ const AddNewStudent = ({ fetchStudentList, grades }) => {
                   </label>
                   <Input
                     id="email"
-                    placeholder="Enter Email"
+                    placeholder="Enter email"
                     className="col-span-3"
-                    {...register("EMAIL", { required: true })}
+                    {...register("email", { required: true })}
                   />
                 </div>
                 <div className="flex-col py-3">
@@ -105,9 +105,9 @@ const AddNewStudent = ({ fetchStudentList, grades }) => {
                   </label>
                   <Input
                     id="passowrd"
-                    placeholder="Enter Password"
+                    placeholder="Enter password"
                     className="col-span-3"
-                    {...register("PASSWORD", { required: true })}
+                    {...register("password", { required: true })}
                   />
                 </div>
                 <div className="flex-col py-3">
@@ -116,24 +116,24 @@ const AddNewStudent = ({ fetchStudentList, grades }) => {
                   </label>
                   <Input
                     id="address"
-                    placeholder="Enter Address"
+                    placeholder="Enter address"
                     className="col-span-3"
-                    {...register("ADDRESS", { required: true })}
+                    {...register("address", { required: true })}
                   />
                 </div>
                 <div className="flex flex-col py-2">
-                  <label>Select Grade</label>
+                  <label>Select grade</label>
                   <select
                     className="w-full h-10 border rounded-md"
-                    {...register("GRADE", { required: true })}
+                    {...register("grade", { required: true })}
                   >
                     {grades?.map((grade, index) => (
                       <option
                         key={index}
-                        value={grade.GRADE_NAME}
+                        value={grade.gradeId}
                         className="text-black"
                       >
-                        {grade.GRADE_NAME}
+                        {grade.gradeName}
                       </option>
                     ))}
                   </select>

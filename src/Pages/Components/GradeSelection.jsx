@@ -24,8 +24,8 @@ const GradeSelection = ({ selectedGrade }) => {
           onChange={(event)=>selectedGrade(event.target.value)}
         >
           {grades?.map((grade, index) => (
-            <option key={index} value={grade.SEMESTER}>
-              {grade.SEMESTER}
+            <option key={index} value={grade.gradeId}>
+              {grade.gradeName}
             </option>
           ))}
         </select>

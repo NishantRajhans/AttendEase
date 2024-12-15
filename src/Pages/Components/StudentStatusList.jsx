@@ -7,7 +7,7 @@ const StudentStatusList = ({selectedMonth,selectedSubject,totalAttendance}) => {
     const getPresentRecord = () => {
         let count=0;
         totalAttendance.map((value)=>{
-            if(value.PRESENT==1)count=count+1;
+            if(value.present==1)count=count+1;
         })
         return count;
     };

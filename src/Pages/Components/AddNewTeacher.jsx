@@ -26,9 +26,9 @@ const AddNewStudent = ({ fetchTeacherList, setTeacherlist }) => {
       const response = await axios.post(
         `${API}/api/v1/Admin/AddTeacher`,
         {
-          NAME: data.NAME,
-          EMAIL: data.EMAIL,
-          PASSWORD: data.PASSWORD,
+          name: data.name,
+          email: data.email,
+          password: data.password,
         },
         {
           headers: {
@@ -64,9 +64,9 @@ const AddNewStudent = ({ fetchTeacherList, setTeacherlist }) => {
                   </label>
                   <Input
                     id="name"
-                    placeholder="Enter Teacher Name"
+                    placeholder="Enter Teacher name"
                     className="col-span-3"
-                    {...register("NAME", { required: true })}
+                    {...register("name", { required: true })}
                   />
                 </div>
                 <div className="flex-col py-3">
@@ -75,9 +75,9 @@ const AddNewStudent = ({ fetchTeacherList, setTeacherlist }) => {
                   </label>
                   <Input
                     id="email"
-                    placeholder="Enter Email"
+                    placeholder="Enter email"
                     className="col-span-3"
-                    {...register("EMAIL", { required: true })}
+                    {...register("email", { required: true })}
                   />
                 </div>
                 <div className="flex-col py-3">
@@ -86,9 +86,9 @@ const AddNewStudent = ({ fetchTeacherList, setTeacherlist }) => {
                   </label>
                   <Input
                     id="password"
-                    placeholder="Enter Password"
+                    placeholder="Enter password"
                     className="col-span-3"
-                    {...register("PASSWORD", { required: true })}
+                    {...register("password", { required: true })}
                   />
                 </div>
                 <div className="py-3 flex justify-end gap-3">

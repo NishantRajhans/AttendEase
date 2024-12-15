@@ -18,13 +18,13 @@ const StudentDashboard = () => {
       const MONTH = date.split("/")[1];
       const YEAR = date.split("/")[2];
       const Token = localStorage.getItem("Token");
-      const SUBJECT_ID = selectedSubject;
+      const subjectId = selectedSubject;
       const list = await axios.get(
-        `${API}/api/v1/Student/GetGradeSubjectAttedance?SUBJECT_ID=` +
-          SUBJECT_ID +
-          "&MONTH=" +
+        `${API}/api/v1/Student/GetGradeSubjectAttedance?subjectId=` +
+          subjectId +
+          "&month=" +
           MONTH +
-          "&YEAR=" +
+          "&year=" +
           YEAR,
         {
           headers: {

@@ -19,7 +19,7 @@ const AttendanceList = ({ attandanceList, selectedMonth,studentList,setAttendanc
   );
   const colDefs = useMemo(() => {
     const baseCols = [
-      { field: "NAME", headerName: "Name", filter: true },
+      { field: "name", headerName: "Name", filter: true },
     ];
     const dayCols = daysArray.map((day) => ({
       field: day.toString(),
@@ -30,9 +30,9 @@ const AttendanceList = ({ attandanceList, selectedMonth,studentList,setAttendanc
     return [...baseCols, ...dayCols];
   }, [daysArray]);
   const [rowData, setRowData] = useState([]);
-  const isPresent = (date, STUDENT_ID) => {
+  const ispresent = (date, studentId) => {
     if(attandanceList?.find(
-      (item) => moment(item.ATTENDANCE_DATE).date() === date && item.STUDENT_ID === STUDENT_ID&&item.PRESENT==1
+      (item) => moment(item.attendanceDate).date() === date && item.studentId === studentId&&item.present==1
     )) return true
     else return false
   };
@@ -40,12 +40,12 @@ const AttendanceList = ({ attandanceList, selectedMonth,studentList,setAttendanc
       const userList =studentList
       userList?.forEach((obj) => {
         daysArray.forEach((day) => {
-          obj[day] =isPresent(day, obj.STUDENT_ID);
+          obj[day] =ispresent(day, obj.studentId);
         });
       });
       setRowData(userList);
   }, [attandanceList, daysArray,studentList]);
-  const onMarkAttendance = async (day, STUDENT_ID, presentStatus) => {
+  const onMarkAttendance = async (day, studentId, presentStatus) => {
     const TeacherId = localStorage.getItem("UserId");
     const date = moment(selectedMonth).format("YYYY-MM");
     const AttendanceDate = moment(`${date}-${day}`, "YYYY-MM-DD").format(
@@ -54,8 +54,8 @@ const AttendanceList = ({ attandanceList, selectedMonth,studentList,setAttendanc
     const currentDate=new Date();
     const formatDate=moment(currentDate).format("YYYY-MM-DD")
     if(formatDate==AttendanceDate){
-      const array=attendance?.filter((id)=>id!=STUDENT_ID)
-      array?.push(STUDENT_ID);
+      const array=attendance?.filter((id)=>id!=studentId)
+      array?.push(studentId);
       setAttendance(array);
     }
   };
@@ -70,7 +70,7 @@ const AttendanceList = ({ attandanceList, selectedMonth,studentList,setAttendanc
         onCellValueChanged={(event) => {
           onMarkAttendance(
             event.column.colId,
-            event.data.STUDENT_ID,
+            event.data.studentId,
             event.value
           );
         }}

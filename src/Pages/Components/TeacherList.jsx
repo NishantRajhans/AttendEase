@@ -14,12 +14,12 @@ const paginationPageSizeSelector = [20, 100, 500];
 
 const TeacherList = ({ Teacherslist, fetchTeacherList, setTeacherlist }) => {
   const [colDefs, setColDefs] = useState([
-    { field: "TEACHER_ID", filter: true },
-    { field: "NAME", filter: true },
-    { field: "EMAIL", filter: true },
-    { field: "PASSWORD", filter: true },
+    { field: "teacherId",headername: "TeacherId", filter: true },
+    { field: "name",headername: "Name", filter: true },
+    { field: "email",headername: "Email", filter: true },
+    { field: "password",headername: "Password", filter: true },
     {
-      field: "EDIT",
+      field: "edit",
       cellRenderer: (params) => (
         <TeacherEditButton
           data={params.data}
@@ -29,7 +29,7 @@ const TeacherList = ({ Teacherslist, fetchTeacherList, setTeacherlist }) => {
       width: "200%",
     },
     {
-      field: "DELETE",
+      field: "delete",
       cellRenderer: (params) => (
         <TeacherDeleteButton
           data={params.data}

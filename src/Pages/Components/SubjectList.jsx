@@ -23,11 +23,11 @@ const SubjectList = ({
   const [colDefs, setColDefs] = useState([]);
   useEffect(() => {
     setColDefs([
-      { field: "SUBJECT", filter: true, width: "250%" },
-      { field: "GRADE", filter: true, width: "250%" },
-      { field: "TEACHER", filter: true, width: "250%" },
+      { field: "subject", filter: true, width: "250%" },
+      { field: "grade", filter: true, width: "250%" },
+      { field: "teacher", filter: true, width: "250%" },
       {
-        field: "EDIT",
+        field: "edit",
         cellRenderer: (params) => (
           <SubjectEditButton
             data={params}
@@ -37,7 +37,7 @@ const SubjectList = ({
         width: "200%",
       },
       {
-        field: "DELETE",
+        field: "delete",
         cellRenderer: (params) => (
           <SubjectDeleteButton
             data={params}

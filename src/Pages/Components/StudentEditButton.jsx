@@ -28,12 +28,12 @@ const EditButton = ({ data, fetchStudentList, grades }) => {
       const response = await axios.put(
         `${API}/api/v1/Admin/EditStudent/${id}`,
         {
-          NAME: dataValue.NAME,
-          EMAIL: dataValue.EMAIL,
-          PASSWORD: dataValue.PASSWORD,
-          PHONENUMBER: dataValue.PHONENUMBER,
-          ADDRESS: dataValue.ADDRESS,
-          GRADE: dataValue.GRADE,
+          name: dataValue.name,
+          email: dataValue.email,
+          password: dataValue.password,
+          phoneNumber: dataValue.phoneNumber,
+          address: dataValue.address,
+          grade: dataValue.grade,
         },
         {
           headers: {
@@ -65,20 +65,20 @@ const EditButton = ({ data, fetchStudentList, grades }) => {
         </DialogHeader>
         <form
           onSubmit={handleSubmit((value) => {
-            HandleEdit(value, data.STUDENT_ID);
+            HandleEdit(value, data.studentId);
             console.log(data);
           })}
         >
           <div className="flex-col py-3">
             <label htmlFor="fullname" className="text-right">
-              Full Name
+              Full name
             </label>
             <Input
               id="fullname"
-              placeholder="Enter Full Name"
+              placeholder="Enter Full name"
               className="col-span-3"
-              defaultValue={data.NAME}
-              {...register("NAME", { required: true })}
+              defaultValue={data.name}
+              {...register("name", { required: true })}
             />
           </div>
           <div className="flex-col py-3">
@@ -90,8 +90,8 @@ const EditButton = ({ data, fetchStudentList, grades }) => {
               id="contact"
               placeholder="Enter Contact Number"
               className="col-span-3"
-              defaultValue={data.PHONENUMBER}
-              {...register("PHONENUMBER", { required: true })}
+              defaultValue={data.phoneNumber}
+              {...register("phoneNumber", { required: true })}
             />
           </div>
           <div className="flex-col py-3">
@@ -100,10 +100,10 @@ const EditButton = ({ data, fetchStudentList, grades }) => {
             </label>
             <Input
               id="email"
-              placeholder="Enter Email"
+              placeholder="Enter email"
               className="col-span-3"
-              defaultValue={data.EMAIL}
-              {...register("EMAIL", { required: true })}
+              defaultValue={data.email}
+              {...register("email", { required: true })}
             />
           </div>
           <div className="flex-col py-3">
@@ -112,10 +112,10 @@ const EditButton = ({ data, fetchStudentList, grades }) => {
             </label>
             <Input
               id="password"
-              placeholder="Enter Password"
+              placeholder="Enter password"
               className="col-span-3"
-              defaultValue={data.PASSWORD}
-              {...register("PASSWORD", { required: true })}
+              defaultValue={data.password}
+              {...register("password", { required: true })}
             />
           </div>
           <div className="flex-col py-3">
@@ -124,10 +124,10 @@ const EditButton = ({ data, fetchStudentList, grades }) => {
             </label>
             <Input
               id="address"
-              placeholder="Enter Address"
+              placeholder="Enter address"
               className="col-span-3"
-              defaultValue={data.ADDRESS}
-              {...register("ADDRESS", { required: true })}
+              defaultValue={data.address}
+              {...register("address", { required: true })}
             />
           </div>
           <div className="flex flex-col py-2">
@@ -135,16 +135,16 @@ const EditButton = ({ data, fetchStudentList, grades }) => {
             <select
               className="w-full h-10 border rounded-md"
               id="grade"
-              defaultValue={data.GRADE}
-              {...register("GRADE", { required: true })}
+              defaultValue={data.grade}
+              {...register("grade", { required: true })}
             >
               {grades?.map((grade, index) => (
                 <option
                   key={index}
-                  value={grade.GRADE_NAME}
+                  value={grade.gradeId}
                   className="text-black"
                 >
-                  {grade.GRADE_NAME}
+                  {grade.gradeName}
                 </option>
               ))}
             </select>

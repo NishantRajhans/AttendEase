@@ -9,8 +9,8 @@ const PieChartComponent = ({attandanceList,totalPresent}) => {
         const uniqueRecord = [];
         const existingUser = new Set();
         attandanceList?.forEach((record) => {
-          if (!existingUser.has(record.STUDENT_ID)) {
-            existingUser.add(record.STUDENT_ID);
+          if (!existingUser.has(record.studentId)) {
+            existingUser.add(record.studentId);
             uniqueRecord.push(record);
           }
         });

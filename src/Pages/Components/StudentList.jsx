@@ -18,13 +18,13 @@ const StudentList = ({ Studentlist,fetchStudentList,grades}) => {
   useEffect(() => {
     if (grades && grades.length > 0) {
       setColDefs([
-        { field: "STUDENT_ID", filter: true },
-        { field: "NAME", filter: true },
-        { field: "ADDRESS", filter: true },
-        { field: "GRADE", filter: true },
-        { field: "PHONENUMBER", filter: true },
+        { field: "studentId",headername: "StudentId", filter: true },
+        { field: "name",headername: "Name", filter: true },
+        { field: "address",headername: "Address", filter: true },
+        { field: "grade",headername: "Grade", filter: true },
+        { field: "phoneNumber",headername: "PhoneNumber", filter: true },
         {
-          field: "EDIT",
+          field: "edit",
           cellRenderer: (params) => (
             <EditButton
               grades={grades}
@@ -35,7 +35,7 @@ const StudentList = ({ Studentlist,fetchStudentList,grades}) => {
           width: "200%",
         },
         {
-          field: "DELETE",
+          field: "delete",
           cellRenderer: (params) => (
             <DeleteButton
               fetchStudentList={fetchStudentList}

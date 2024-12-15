@@ -29,9 +29,9 @@ const SubjectEditButton = ({ data, fetchSubjectList }) => {
       const response = await axios.put(
         `${API}/api/v1/Admin/EditSubject/${id}`,
         {
-          NAME: Valuedata.NAME,
-          EMAIL: Valuedata.EMAIL,
-          PASSWORD: Valuedata.PASSWORD,
+          name: Valuedata.name,
+          email: Valuedata.email,
+          password: Valuedata.password,
         },
         {
           headers: {
@@ -66,38 +66,38 @@ const SubjectEditButton = ({ data, fetchSubjectList }) => {
         >
           <div className="flex-col py-3">
             <label htmlFor="fullname" className="text-right">
-              Full Name
+              Full name
             </label>
             <Input
               id="fullname"
-              placeholder="Enter Full Name"
+              placeholder="Enter Full name"
               className="col-span-3"
-              defaultValue={data.NAME}
-              {...register("NAME", { required: true })}
+              defaultValue={data.name}
+              {...register("name", { required: true })}
             />
           </div>
           <div className="flex-col py-3">
             <label htmlFor="email" className="text-right">
-              Email
+              email
             </label>
             <Input
               id="email"
-              placeholder="Enter Email"
+              placeholder="Enter email"
               className="col-span-3"
-              defaultValue={data.EMAIL}
-              {...register("EMAIL", { required: true })}
+              defaultValue={data.email}
+              {...register("email", { required: true })}
             />
           </div>
           <div className="flex-col py-3">
             <label htmlFor="password" className="text-right">
-              Password
+              password
             </label>
             <Input
               id="password"
-              placeholder="Enter Password"
+              placeholder="Enter password"
               className="col-span-3"
-              defaultValue={data.PASSWORD}
-              {...register("PASSWORD", { required: true })}
+              defaultValue={data.password}
+              {...register("password", { required: true })}
             />
           </div>
           <div className="py-3 flex justify-end gap-3">

@@ -50,7 +50,7 @@ const TeacherDeleteButton = ({data,fetchTeacherList}) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={() => {console.log(data);HandleDelete(data.TEACHER_ID)}}>
+              <AlertDialogAction onClick={() => {console.log(data);HandleDelete(data.teacherId)}}>
                 Continue
               </AlertDialogAction>
             </AlertDialogFooter>

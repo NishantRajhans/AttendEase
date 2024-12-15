@@ -27,9 +27,9 @@ const AddNewStudent = ({ fetchSubjectList, Teacherslist, grades }) => {
       const response = await axios.post(
         `${API}/api/v1/Admin/AddSubject`,
         {
-          GRADE_ID: data.GRADE_ID,
-          SUBJECT_NAME: data.SUBJECT_NAME,
-          TEACHER_ID: data.TEACHER_ID,
+          gradeId: data.gradeId,
+          subjectName: data.subjectName,
+          teacherId: data.teacherId,
         },
         {
           headers: {
@@ -67,22 +67,22 @@ const AddNewStudent = ({ fetchSubjectList, Teacherslist, grades }) => {
                     id="name"
                     placeholder="Enter Subject Name"
                     className="col-span-3"
-                    {...register("SUBJECT_NAME", { required: true })}
+                    {...register("subjectName", { required: true })}
                   />
                 </div>
                 <div className="flex flex-col py-2">
                   <label>Select Teacher</label>
                   <select
                     className="w-full h-10 border rounded-md"
-                    {...register("TEACHER_ID", { required: true })}
+                    {...register("teacherId", { required: true })}
                   >
                     {Teacherslist?.map((teacher, index) => (
                       <option
                         key={index}
-                        value={teacher.TEACHER_ID}
+                        value={teacher.teacherId}
                         className="text-black"
                       >
-                        {teacher.NAME}
+                        {teacher.name}
                       </option>
                     ))}
                   </select>
@@ -91,15 +91,15 @@ const AddNewStudent = ({ fetchSubjectList, Teacherslist, grades }) => {
                   <label>Select Grade</label>
                   <select
                     className="w-full h-10 border rounded-md"
-                    {...register("GRADE_ID", { required: true })}
+                    {...register("gradeId", { required: true })}
                   >
                     {grades?.map((grade, index) => (
                       <option
                         key={index}
-                        value={grade.GRADE_ID}
+                        value={grade.gradeId}
                         className="text-black"
                       >
-                        {grade.GRADE_NAME}
+                        {grade.gradeName}
                       </option>
                     ))}
                   </select>
